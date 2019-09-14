@@ -101,3 +101,109 @@ Creating a New Card will open a Card Window in Edit Mode, with a button to Save 
 
 Edit Mode will take keyboard input away from the Text Editor.
 
+## Development
+
+This is a node.js app, attempting to be as portable and reproducible as possible.
+
+To run on your local machine, use standard commands:
+
+```
+$> npm install
+$> npm run start
+```
+
+
+### Using Docker Container
+
+The included `docker-compose.yml` is the standard test platform. This helps provide a consistent app environment for working on different machines.
+
+The app folder is shared between your local system and the Docker Container. Changes on either side will be immediately visible on the other.
+
+Once the container is running, changes made in your IDE/shell will be visible to the node server. Refresh your browser, or restart the server (by restarting the container).
+
+To test you app on different versions of node, edit `docker-compose.yml` with the desired version, and re-create the container.
+
+Once you're done testing, the Docker Container can be stopped and cleaned up.
+
+#### Docker Compose commands
+
+**Create the Container**
+
+To start the docker container, run:
+
+```
+$> docker-compose up -d
+```
+
+**Watch the log activity**
+
+To follow the log output of the container, run:
+
+```
+$> docker-compose logs -f
+```
+
+Press `ctrl+c` to close
+
+**Start/Stop/Restart**
+
+To restart the node server, run:
+
+```
+$> docker-compose restart
+```
+
+You can also stop/start with:
+
+```
+$> docker-compose stop
+$> docker-compose start
+```
+
+**Access the Container**
+
+To get to a prompt inside the running docker container, run:
+
+```
+$> docker-compose exec node bash
+```
+
+This will let you use the same node/npm commands as the running app.
+
+**Cleanup/Delete**
+
+To clean up the container, run:
+
+```
+$> docker-compose down
+```
+
+This will stop the container if it's running.
+
+#### Example workflow
+
+In a shell in the same directory as `docker-compose.yml`, and run:
+
+```
+$> docker-compose up -d
+$> docker-compose logs -f
+```
+
+This will show the running logs of the app environment.
+
+Open IDE if desired, or open another shell session to edit files from the command-line.
+
+Open Browser to [localhost:8000](http://localhost:8000)
+
+Refresh to browser after making changes.
+If you change the server config / startup, restart the container.
+
+Test and commit changes.
+
+When you're done working, cleanup the container, and push git changes
+
+```
+$> docker-compose down
+$> git push
+```
+

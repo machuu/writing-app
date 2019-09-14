@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  node:
+    container_name: writing-app_dev
+    image: node:12.9.0-stretch
+    security_opt: 
+      - label:disable
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - "8000:8000"
+    command: sh -c "
+        echo 'Bootstrapping Node App'
+        && npm install
+        && npm run debug
+      "

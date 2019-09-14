@@ -5,6 +5,7 @@
   "main": "express.js",
   "scripts": {
     "start": "node express.js",
+    "debug": "DEBUG=writing-app:server node express.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
