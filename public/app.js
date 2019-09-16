@@ -1,3 +1,5 @@
+const EditorJS = require('@editorjs/editorjs');
+var editor = new EditorJS();
 
 /**
  * Service worker registration

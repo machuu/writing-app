@@ -14,5 +14,6 @@ services:
     command: sh -c "
         echo 'Bootstrapping Node App'
         && npm install
+        && npm run build
         && npm run debug
       "
