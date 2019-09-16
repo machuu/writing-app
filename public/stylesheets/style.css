@@ -6,3 +6,16 @@ body {
 a {
   color: #00B7FF;
 }
+
+#editorjs-border {
+	border-style: solid;
+}
+
+/**
+ * Simple loader for page transition
+ */
+@media all and (display-mode: standalone) {
+    html {
+        background: #020015 url(loading.svg) center center no-repeat;
+    }
+}
