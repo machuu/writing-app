@@ -10,6 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@editorjs/editorjs": "~2.15.1",
     "browserify": "~16.5.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
