@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "outDir": "public",
+    "sourceMap": true,
+    "target": "es6",
+    "typeRoots": ["node_modules/@types"],
+    "types": ["core-js", "node"]
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
+

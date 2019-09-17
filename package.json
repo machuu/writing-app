@@ -4,14 +4,18 @@
   "description": "Minimal web interface for writing stories.",
   "main": "express.js",
   "scripts": {
-    "build": "browserify public/app.js > public/app.bundle.js",
+    "build": "browserify -p tsify public/app.ts > public/app.bundle.js",
+    "build-debug": "browserify --debug -p tsify public/app.ts > public/app.bundle.js",
     "start": "node express.js",
     "debug": "DEBUG=writing-app:server node express.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@editorjs/editorjs": "~2.15.1",
-    "browserify": "~16.5.0",
+    "browserify": "^10.2.6",
+    "typescript": "^2.9.2",
+    "tsify": "~4.0.1",
+    "@types/node": "^12.0.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
