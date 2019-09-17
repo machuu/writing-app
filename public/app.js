@@ -22,8 +22,5 @@ if ('serviceWorker' in navigator) {
         });
 
 
-        // Global flag to detect standalone display mode
-        window.IS_STANDALONE = window.matchMedia('(display-mode: standalone)').matches;
-
     });
 }
