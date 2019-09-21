@@ -22,7 +22,7 @@ if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./serviceWorker.js', {scope : "./"} ).then(function(registration) {
             
             // everything is ok
-            console.log('ServiceWorker registrato con successo, scope: ', registration.scope);
+            console.log('ServiceWorker registration success, scope: ', registration.scope);
 
         }, function(err) {
             // an error occurred
