@@ -1,5 +1,13 @@
+const saveButton = document.getElementById('saveButton');
 const EditorJS = require('@editorjs/editorjs');
 var editor = new EditorJS();
+
+saveButton.addEventListener('click', function () {
+  editor.save().then((savedData: any) => {
+    console.log("Saving EditorJS");
+    console.log(savedData);
+  });
+});
 
 /**
  * Service worker registration
