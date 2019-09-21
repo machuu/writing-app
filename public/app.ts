@@ -1,6 +1,17 @@
 const saveButton = document.getElementById('saveButton');
 const EditorJS = require('@editorjs/editorjs');
-var editor = new EditorJS();
+var editor = new EditorJS({
+  data: {
+    blocks: [
+      {
+        type: "paragraph",
+        data: {
+          text: "Sample Text. You can delete and overwrite this"
+        }
+      }
+    ]
+  }
+});
 
 saveButton.addEventListener('click', function () {
   editor.save().then((savedData: any) => {
