@@ -1,3 +1,6 @@
+/**
+ * Text Editor
+ */
 const saveButton = document.getElementById('saveButton');
 const loadButton = document.getElementById('loadButton');
 
