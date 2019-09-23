@@ -4,10 +4,10 @@
   "description": "Minimal web interface for writing stories.",
   "main": "express.js",
   "scripts": {
-    "build": "browserify -p tsify public/app.ts > public/app.bundle.js",
-    "build-debug": "browserify --debug -p tsify public/app.ts > public/app.bundle.js",
-    "watchify": "watchify -p tsify public/app.ts -o public/app.bundle.js",
-    "watchify-debug": "watchify --debug -p tsify public/app.ts -o public/app.bundle.js",
+    "build": "browserify -p tsify src/app.ts -o public/app.bundle.js",
+    "build-debug": "browserify --debug -p tsify src/app.ts -o public/app.bundle.js",
+    "watchify": "watchify -p tsify src/app.ts -o public/app.bundle.js",
+    "watchify-debug": "watchify --debug -p tsify src/app.ts -o public/app.bundle.js",
     "start": "node express.js",
     "debug": "DEBUG=writing-app:server node express.js",
     "test": "echo \"Error: no test specified\" && exit 1"
