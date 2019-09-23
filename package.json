@@ -6,6 +6,8 @@
   "scripts": {
     "build": "browserify -p tsify public/app.ts > public/app.bundle.js",
     "build-debug": "browserify --debug -p tsify public/app.ts > public/app.bundle.js",
+    "watchify": "watchify -p tsify public/app.ts -o public/app.bundle.js",
+    "watchify-debug": "watchify --debug -p tsify public/app.ts -o public/app.bundle.js",
     "start": "node express.js",
     "debug": "DEBUG=writing-app:server node express.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,6 +15,7 @@
   "dependencies": {
     "@editorjs/editorjs": "~2.15.1",
     "browserify": "^10.2.6",
+    "watchify": "^3.11.0",
     "typescript": "^2.9.2",
     "tsify": "~4.0.1",
     "@types/node": "^12.0.0",
