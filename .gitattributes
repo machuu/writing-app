@@ -1,0 +1,6 @@
+# Use Unix line endings in all text files.
+* text=auto eol=lf
+
+# Web Dev stuff
+*.{js,ts}			whitespace=trailing-space,space-before-tab
+*.{json,yaml,yml}	whitespace=trailing-space,space-before-tab
