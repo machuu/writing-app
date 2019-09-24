@@ -8,8 +8,15 @@
     "sourceMap": true,
     "target": "es6",
     "typeRoots": ["node_modules/@types"],
-    "types": ["core-js", "node"]
+    "types": ["core-js", "node"],
+	"baseUrl": ".",
+	"paths": [
+		"src"
+	]
   },
+  "include": [
+    "src/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]
