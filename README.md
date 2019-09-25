@@ -21,14 +21,25 @@ A Card stores information about some entity in the Story
 - Object
 - etc.
 
+Cards are organized into a Deck.
+
 **Association**
 
 A Scene can reference one or more Cards, and the Card will contain a list of all Scenes it is referenced in.
+
+**Project**
+
+A Project is a Story. The Project consists of:
+
+- a group of Scenes, and how they are organized
+- one or more Decks of Cards
+- Editor Configuration
 
 ## Layout
 
 Basic Layout consists of:
 
+- Site Navbar
 - Text Editor
 - Scene Navigator
 - Card Navigator
@@ -59,27 +70,31 @@ Write automated unit/integration tests to ensure functionality before deploying 
 
 Here are some features and behaviors to define development goals for this App.
 
-### 1. PWA Skeleton
+### PWA Skeleton
 
 Minimum skeleton to operate as a Progressive Web App. Static landing page that is cached locally.
 
-### 2. Text Editor
+### Text Editor
 
 Text editor in a browser that saves content to the local machine.
 
-### 3. Scene Navigation
+### Scene Navigation
 
 Scene Navigator is collapsable and is collapsed by default.
 
 Select from a list of Scenes (single text file), and load the selected Scene into the Text Editor.
 Create a new Scene in the Scene Navigator, and open a blank scene in the Text Editor.
 
+Group Scenes into nested Folders. A Folder can represent a Chapter or Story Arc. 
+
 Scenes in the Scene Navigator should be draggable to change the order of Scenes in the Story.
+
+Order of Scenes in Scene Navigator controls the order in the Reader.
 
 
 When Scene Navigator is open, keyboard still goes to Text Editor
 
-### 4. Cards and Card Navigation
+### Cards and Card Navigation
 
 Card Navigator is collapsable, and is collapsed by default.
 
@@ -100,6 +115,33 @@ Selecting an existing Card will open it in Read Mode, with a button to change it
 Creating a New Card will open a Card Window in Edit Mode, with a button to Save the Card.
 
 Edit Mode will take keyboard input away from the Text Editor.
+
+### Reader
+
+How would the Project look as an ebook?
+
+Combine Scenes and display in a scrollable block.
+
+This could be an overlay on the main page, or in a separate tab/window.
+
+### Site Navbar
+
+Navigation Bar for the entire Writing App site. Contains the following:
+
+- Project Selector
+- Current Project Name
+- Settings Button
+
+#### Project Selector
+
+A Project is a set of Scenes, and one or more Decks of Cards.
+
+Drop-Down list populated with Projects, with option to Create a new Project.
+Selecting a Project loads the associated Scenes and Cards into the current page.
+
+#### Settings
+
+Menu to change Editor Configuration and view/change User information
 
 ## Development
 
@@ -170,6 +212,17 @@ $> docker-compose exec node bash
 
 This will let you use the same node/npm commands as the running app.
 
+**Start Watchify**
+
+Watchify will automatically re-build bundled Javascript from TypeScript files.
+
+To run `watchify` inside the Container:
+
+```
+$> docker-compose run node bash
+$> npm run watchify
+```
+
 **Cleanup/Delete**
 
 To clean up the container, run:
@@ -191,6 +244,16 @@ $> docker-compose logs -f
 
 This will show the running logs of the app environment.
 
+Since the app is using TypeScript, updated code needs to be transpiled into javascript.
+This will be done once when the Container starts, but on changes while Container is already running. `package.json` contains `watchify` which will re-transpile TS -> JS whenever `src/index.ts` or any of it's dependencies are updated.
+
+To run `watchify`:
+
+```
+$> docker-compose run node bash
+$> npm run watchify
+```
+
 Open IDE if desired, or open another shell session to edit files from the command-line.
 
 Open Browser to [localhost:8000](http://localhost:8000)
@@ -199,6 +262,16 @@ Refresh to browser after making changes.
 If you change the server config / startup, restart the container.
 
 Test and commit changes.
+
+Reference GitHub issues in your commit message:
+
+```
+refs #5
+fixes #18
+closes #2
+```
+
+This will automatically associate the commit with the issue.
 
 When you're done working, cleanup the container, and push git changes
 
