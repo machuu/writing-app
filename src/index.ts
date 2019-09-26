@@ -23,6 +23,22 @@ if ('serviceWorker' in navigator) {
 }
 
 /**
+ * Sidebar Open/Close
+ */
+const openSceneNav  = document.getElementById('scene-navigator-button-open');
+const closeSceneNav = document.getElementById('scene-navigator-button-close');
+
+/* Set the width of the Scene Navigator to 250px */
+openSceneNav.addEventListener('click', function () {
+  document.getElementById("scene-navigator").style.width = "250px";
+});
+
+/* Set the width of the Scene Navigator to 0 */
+closeSceneNav.addEventListener('click', function () {
+  document.getElementById("scene-navigator").style.width = "0";
+});
+
+/**
  * Text Editor
  */
 const saveButton = document.getElementById('saveButton');

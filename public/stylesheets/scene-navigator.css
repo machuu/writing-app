@@ -1,0 +1,58 @@
+ /* The scene-navigator on left side */
+#scene-navigator {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0;
+  left: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the scene-navigator */
+}
+
+/* The scene-navigator links */
+#scene-navigator div {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+#scene-navigator div:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+#scene-navigator #scene-navigator-button-close {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* The button used to open the scene-navigator */
+#scene-navigator-button-open {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  width: 25vh;
+}
+
+#scene-navigator-button-open:hover {
+  background-color: #444;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .scene-navigator {padding-top: 15px;}
+  .scene-navigator div {font-size: 18px;}
+} 
