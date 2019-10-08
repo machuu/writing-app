@@ -14,15 +14,17 @@
   },
   "dependencies": {
     "@editorjs/editorjs": "~2.15.1",
-    "browserify": "^10.2.6",
-    "watchify": "^3.11.0",
-    "typescript": "^2.9.2",
-    "tsify": "~4.0.1",
-    "@types/node": "^12.0.0",
     "cookie-parser": "~1.4.4",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^12.0.0",
+    "browserify": "^10.2.6",
     "debug": "~2.6.9",
     "express": "~4.16.1",
-    "morgan": "~1.9.1"
+    "tsify": "~4.0.1",
+    "typescript": "^2.9.2",
+    "watchify": "^3.11.0"
   },
   "repository": {
     "type": "git",
