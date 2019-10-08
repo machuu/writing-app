@@ -23,20 +23,13 @@ if ('serviceWorker' in navigator) {
 }
 
 /**
- * Sidebar Open/Close
+ * Navigation
  */
-const openSceneNav  = document.getElementById('scene-navigator-button-open');
-const closeSceneNav = document.getElementById('scene-navigator-button-close');
+import NavMenu from "./navigation";
 
-/* Set the width of the Scene Navigator to 250px */
-openSceneNav.addEventListener('click', function () {
-  document.getElementById("scene-navigator").style.width = "250px";
-});
-
-/* Set the width of the Scene Navigator to 0 */
-closeSceneNav.addEventListener('click', function () {
-  document.getElementById("scene-navigator").style.width = "0";
-});
+let sceneNavigator = new NavMenu('scene-navigator');
+sceneNavigator.closed_width = "10px";
+sceneNavigator.opened_width = "250px";
 
 /**
  * Text Editor
