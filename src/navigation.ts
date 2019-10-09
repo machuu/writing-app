@@ -65,10 +65,12 @@ class NavMenu {
   }
 
   private set_height(css_size: string) {
+    console.log(`Set ${this.element.id} height to ${css_size}`);
     this.element.style.height = css_size;
   }
 
   private set_width(css_size: string) {
+    console.log(`Set ${this.element.id} width to ${css_size}`);
     this.element.style.width = css_size;
   }
 
