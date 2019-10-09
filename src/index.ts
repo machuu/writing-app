@@ -31,6 +31,10 @@ let sceneNavigator = new NavMenu('scene-navigator');
 sceneNavigator.closed_width = "20px";
 sceneNavigator.opened_width = "250px";
 
+let cardNavigator = new NavMenu('card-navigator');
+cardNavigator.closed_width = "20px";
+cardNavigator.opened_width = "250px";
+
 /**
  * Text Editor
  */
