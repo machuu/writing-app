@@ -3,24 +3,44 @@
     "name": "My First Progressive WebApp",
     "icons": [
         {
-              "src": "assets/logo-1x.png",
-              "type": "image/png",
-              "sizes": "48x48"
+          "src":"/favicon.ico",
+          "sizes":"48x48",
+          "type":"image/ico"
         },
         {
-            "src": "assets/logo-2x.png",
-            "type": "image/png",
-            "sizes": "96x96"
+          "src":"assets/favicon.ico",
+          "sizes":"48x48",
+          "type":"image/ico"
         },
         {
-            "src": "assets/logo-4x.png",
-            "type": "image/png",
-            "sizes": "192x192"
+          "src":"assets/android-chrome-192x192.png",
+          "sizes":"192x192",
+          "type":"image/png"
         },
         {
-            "src": "assets/logo-large.png",
-            "type": "image/png",
-            "sizes": "512x512"
+          "src":"assets/android-chrome-512x512.png",
+          "sizes":"512x512",
+          "type":"image/png"
+        },
+        {
+          "src":"assets/apple-touch-icon.png",
+          "sizes":"180x180",
+          "type":"image/png"
+        },
+        {
+          "src":"assets/favicon-16x16.png",
+          "sizes":"16x16",
+          "type":"image/png"
+        },
+        {
+          "src":"assets/favicon-32x32",
+          "sizes":"32x32",
+          "type":"image/png"
+        },
+        {
+          "src":"assets/loading.svg",
+          "sizes":"128x128",
+          "type":"image/svg"
         }
     ],
     "start_url": "./",
