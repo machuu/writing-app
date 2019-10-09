@@ -28,7 +28,7 @@ if ('serviceWorker' in navigator) {
 import NavMenu from "./navigation";
 
 let sceneNavigator = new NavMenu('scene-navigator');
-sceneNavigator.closed_width = "10px";
+sceneNavigator.closed_width = "20px";
 sceneNavigator.opened_width = "250px";
 
 /**
