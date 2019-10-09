@@ -1,20 +1,31 @@
  /* The scene-navigator on left side */
-#scene-navigator {
+.navigator {
   height: 100%; /* 100% Full-height */
-  width: 0; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
   z-index: 1; /* Stay on top */
-  top: 0;
-  left: 0;
   background-color: #111; /* Black*/
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the scene-navigator */
 }
 
+#scene-navigator {
+  position: fixed; /* Stay in place */
+  width: 20; /* 0 width - change this with JavaScript */
+  top: 0;
+  left: 0;
+}
+
+#card-navigator {
+  position: fixed; /* Stay in place */
+  width: 20; /* 0 width - change this with JavaScript */
+  top: 0;
+  right: 0;
+}
+
 /* The scene-navigator links */
-#scene-navigator div {
-  padding: 8px 8px 8px 32px;
+.navigator-item {
+  padding: 32px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
   color: #818181;
@@ -28,12 +39,22 @@
 }
 
 /* Position and style the close button (top right corner) */
-#scene-navigator #scene-navigator-button-close {
-  position: absolute;
-  top: 0;
-  right: 25px;
+.navigator-button-toggle {
+  color: #818181;
+  display: block;
   font-size: 36px;
-  margin-left: 50px;
+}
+
+#scene-navigator-button-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0;
+}
+
+#card-navigator-button-toggle {
+  position: absolute;
+  top: 50%;
+  left: 0;
 }
 
 /* The button used to open the scene-navigator */
