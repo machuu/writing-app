@@ -9,6 +9,7 @@
     "watchify": "watchify -v -p tsify src/index.ts -o public/app.bundle.js",
     "watchify-debug": "watchify --debug -v -p tsify src/index.ts -o public/app.bundle.js",
     "start": "node express.js",
+    "start-bg": "node express.js &",
     "debug": "DEBUG=writing-app:server node express.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
