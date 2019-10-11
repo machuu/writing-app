@@ -6,6 +6,7 @@ services:
     image: node:12.9.0-stretch
     security_opt: 
       - label:disable
+    user: "${UID}:${GID}"
     working_dir: /app
     volumes:
       - ./:/app
