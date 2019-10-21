@@ -6,10 +6,10 @@ const EditorJS = require("@editorjs/editorjs");
 let defaultTextEditorData: any = {
   blocks: [
     {
-      type: "paragraph",
       data: {
         text: "Sample Text. You can delete and overwrite this",
       },
+      type: "paragraph",
     },
   ],
 };
@@ -47,8 +47,8 @@ class TextEditor {
     this.dataId = this.defaultDataId;
 
     this.editor = new EditorJS({
-      holder: this.element.id,
       data:     initData,
+      holder: this.element.id,
     });
   }
 
