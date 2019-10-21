@@ -10,6 +10,7 @@ services:
     working_dir: /app
     volumes:
       - ./:/app
+      - ./logs:/root/.npm/_logs
     ports:
       - "8000:8000"
     command: sh -c "
