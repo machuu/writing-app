@@ -37,10 +37,10 @@ class NavMenu {
   public set_close_button(button_id: string): void {
     // Assign this Nav's close button, if it exists
     if ( document.getElementById(button_id) ) {
-      this._close_button = <HTMLElement>document.getElementById(button_id);
+      this._close_button = <HTMLElement> document.getElementById(button_id);
 
       // Add new event listener
-      this._close_button.addEventListener('click', () => { this.close() } );
+      this._close_button.addEventListener("click", () => { this.close(); } );
     }
   }
 
@@ -50,7 +50,7 @@ class NavMenu {
       this._open_button = document.getElementById(button_id);
 
       // Add new event listener
-      this._open_button.addEventListener('click', () => { this.open() } );
+      this._open_button.addEventListener("click", () => { this.open(); } );
     }
   }
 
@@ -60,7 +60,7 @@ class NavMenu {
       this._toggle_button = document.getElementById(button_id);
 
       // Add new event listener
-      this._toggle_button.addEventListener('click', () => { this.toggle() } );
+      this._toggle_button.addEventListener("click", () => { this.toggle(); } );
     }
   }
 

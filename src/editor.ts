@@ -1,17 +1,17 @@
 /**
  * Text Editor
  */
-const EditorJS = require('@editorjs/editorjs');
+const EditorJS = require("@editorjs/editorjs");
 
-var defaultTextEditorData: any = {
+let defaultTextEditorData: any = {
   blocks: [
     {
       type: "paragraph",
       data: {
-        text: "Sample Text. You can delete and overwrite this"
-      }
-    }
-  ]
+        text: "Sample Text. You can delete and overwrite this",
+      },
+    },
+  ],
 };
 
 class TextEditor {
@@ -48,7 +48,7 @@ class TextEditor {
 
     this.editor = new EditorJS({
       holder: this.element.id,
-      data:     initData
+      data:     initData,
     });
   }
 
@@ -72,14 +72,14 @@ class TextEditor {
   }
 
   public addSaveButton(saveButtonId: string): void {
-    if( document.getElementById(saveButtonId) ) {
-      document.getElementById(saveButtonId).addEventListener('click', () => { this.save() });
+    if ( document.getElementById(saveButtonId) ) {
+      document.getElementById(saveButtonId).addEventListener("click", () => { this.save(); });
     }
   }
 
   public addLoadButton(loadButtonId: string): void {
-    if( document.getElementById(loadButtonId) ) {
-      document.getElementById(loadButtonId).addEventListener('click', () => { this.load() });
+    if ( document.getElementById(loadButtonId) ) {
+      document.getElementById(loadButtonId).addEventListener("click", () => { this.load(); });
     }
   }
 
@@ -89,13 +89,13 @@ class TextEditor {
       dataId = this.promptForDataId();
     }
     //if ( this.dataIdExists(dataId) ) {
-      console.log(`Retreiving EditorJS from localStorage: ${dataId}`);
-      let retreivedData = JSON.parse( localStorage.getItem(dataId) );
-      console.log('retreived_data: ', retreivedData );
+    console.log(`Retreiving EditorJS from localStorage: ${dataId}`);
+    let retreivedData = JSON.parse( localStorage.getItem(dataId) );
+    console.log("retreived_data: ", retreivedData );
       // Assign retreived data to editor object
-      this.editor.render(retreivedData);
+    this.editor.render(retreivedData);
     //} else {
-      //console.log(`Unable to load '${dataId}' from storage`);
+      //console.log(`Unable to load '${dataId}' from storage`)
     //}
   }
 
@@ -106,13 +106,13 @@ class TextEditor {
     }
 
     //if ( !this.dataIdExists(dataId) || this.confirmOverwriteOld(dataId) ) {
-      this.editor.save().then((savedData: any) => {
+    this.editor.save().then((savedData: any) => {
         console.log(`Saving Editor Data: ${dataId}`);
         console.log(savedData);
-        localStorage.setItem(dataId,JSON.stringify(savedData));
+        localStorage.setItem(dataId, JSON.stringify(savedData));
       });
     //} else {
-      //alert("Cancelled saving current data into existing id: " + dataId );
+      //alert("Cancelled saving current data into existing id: " + dataId )
     //}
   }
 
@@ -121,7 +121,7 @@ class TextEditor {
     return this._data;
   }
 
-  // assign JSON object to Text Editor Data 
+  // assign JSON object to Text Editor Data
   public set data(data: any) {
     this._data = data;
     this.renderData(this.data);

@@ -1,23 +1,22 @@
 /**
  * Service worker registration
  */
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
 
     /**
-     * You can call register() every time a page loads without concern;
+     * You can call register() every time a page loads without concern
      * the browser will figure out if the service worker is already registered or not and handle it accordingly.
      */
-    navigator.serviceWorker.register('./serviceWorker.js', {scope : "./"} ).then(function(registration) {
+    navigator.serviceWorker.register("./serviceWorker.js", {scope : "./"} ).then( (registration) => {
 
       // everything is ok
-      console.log('ServiceWorker registration success, scope: ', registration.scope);
+      console.log("ServiceWorker registration success, scope: ", registration.scope);
 
-    }, function(err) {
+    }, (err) => {
       // an error occurred
-      console.log('ServiceWorker registration failed: ', err);
+      console.log("ServiceWorker registration failed: ", err);
     });
-
 
   });
 }
@@ -27,16 +26,16 @@ if ('serviceWorker' in navigator) {
  */
 import NavMenu from "./navigation";
 
-let sceneNavigator = new NavMenu('scene-navigator');
+let sceneNavigator = new NavMenu("scene-navigator");
 sceneNavigator.closed_width = "20px";
 sceneNavigator.opened_width = "250px";
 
-let cardNavigator = new NavMenu('card-navigator');
+let cardNavigator = new NavMenu("card-navigator");
 cardNavigator.closed_width = "20px";
 cardNavigator.opened_width = "250px";
 
 import TextEditor from "./editor";
 
-let mainEditor = new TextEditor('editorjs');
-mainEditor.addSaveButton('saveButton');
-mainEditor.addLoadButton('loadButton');
+let mainEditor = new TextEditor("editorjs");
+mainEditor.addSaveButton("saveButton");
+mainEditor.addLoadButton("loadButton");
