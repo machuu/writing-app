@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@editorjs/editorjs": "~2.15.1",
+    "@types/core-js": "^2.5.2",
     "cookie-parser": "~1.4.4",
     "express": "~4.16.1",
     "morgan": "~1.9.1",
