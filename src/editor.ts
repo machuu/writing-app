@@ -19,11 +19,11 @@ class TextEditor {
   private editor: any;
   private defaultElementId: string = "editorjs";
   private elementId: string;
-  private _element: HTMLElement;
+  private editorElement: HTMLElement;
   private defaultDataId: string = "textEditorData";
   private defaultData: any;
   private dataId: string;
-  private _data: any = {};
+  private editorData: any = {};
 
   constructor(elementId: string = null, initData: any = defaultTextEditorData ) {
     if ( elementId == null ) {
@@ -53,12 +53,12 @@ class TextEditor {
   }
 
   public get element() {
-    return this._element;
+    return this.editorElement;
   }
 
   public set element(givenElement: HTMLElement) {
-    if ( this._element == null ) {
-      this._element = givenElement;
+    if ( this.editorElement == null ) {
+      this.editorElement = givenElement;
       console.log(`Setting Text Editor Element to element with id '${givenElement.id}'`);
     } else {
       console.log(`Can not change Text Editor element '${this.element.id}' -> '${givenElement.id}'`);
@@ -85,45 +85,36 @@ class TextEditor {
 
   // retreive dataId from storage, then render in Text Editor
   public load(dataId: string = "" ): void {
-    if ( dataId == "" ) {
+    if ( dataId === "" ) {
       dataId = this.promptForDataId();
     }
-    //if ( this.dataIdExists(dataId) ) {
     console.log(`Retreiving EditorJS from localStorage: ${dataId}`);
     let retreivedData = JSON.parse( localStorage.getItem(dataId) );
     console.log("retreived_data: ", retreivedData );
-      // Assign retreived data to editor object
     this.editor.render(retreivedData);
-    //} else {
-      //console.log(`Unable to load '${dataId}' from storage`)
-    //}
   }
 
   // save data from Text Editor into dataId
   public save(dataId: string = ""): void {
-    if ( dataId == "" ) {
+    if ( dataId === "" ) {
       dataId = this.promptForDataId();
     }
 
-    //if ( !this.dataIdExists(dataId) || this.confirmOverwriteOld(dataId) ) {
     this.editor.save().then((savedData: any) => {
         console.log(`Saving Editor Data: ${dataId}`);
         console.log(savedData);
         localStorage.setItem(dataId, JSON.stringify(savedData));
       });
-    //} else {
-      //alert("Cancelled saving current data into existing id: " + dataId )
-    //}
   }
 
   // return JSON object of Text Editor Data
   public get data() {
-    return this._data;
+    return this.editorData;
   }
 
   // assign JSON object to Text Editor Data
   public set data(data: any) {
-    this._data = data;
+    this.editorData = data;
     this.renderData(this.data);
   }
 
