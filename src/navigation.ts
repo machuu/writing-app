@@ -4,16 +4,17 @@
 
 class NavMenu {
 
-  private element:       HTMLElement;
-  private _open_button:   HTMLElement;
-  private _close_button:  HTMLElement;
+  public  _closed_width: string  = "10px";
+  public  _closed_height: string = "100%";
+  public  _opened_width: string  = "200px";
+  public  _opened_height: string = "100%";
+
+  private element: HTMLElement;
+  private _open_button: HTMLElement;
+  private _close_button: HTMLElement;
   private _toggle_button: HTMLElement;
 
   private _is_open: boolean = false;
-  public  _closed_width:  string = "10px";
-  public  _closed_height: string = "100%";
-  public  _opened_width:  string = "200px";
-  public  _opened_height: string = "100%";
 
   constructor(id: string) {
     this.element = document.getElementById(id);
@@ -62,16 +63,6 @@ class NavMenu {
       // Add new event listener
       this._toggle_button.addEventListener("click", () => { this.toggle(); } );
     }
-  }
-
-  private set_height(css_size: string) {
-    console.log(`Set ${this.element.id} height to ${css_size}`);
-    this.element.style.height = css_size;
-  }
-
-  private set_width(css_size: string) {
-    console.log(`Set ${this.element.id} width to ${css_size}`);
-    this.element.style.width = css_size;
   }
 
   public set closed_height(css_size: string) {
@@ -148,6 +139,17 @@ class NavMenu {
       this.open();
     }
   }
+
+  private set_height(css_size: string) {
+    console.log(`Set ${this.element.id} height to ${css_size}`);
+    this.element.style.height = css_size;
+  }
+
+  private set_width(css_size: string) {
+    console.log(`Set ${this.element.id} width to ${css_size}`);
+    this.element.style.width = css_size;
+  }
+
 }
 
 export default NavMenu;
