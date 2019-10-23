@@ -1,0 +1,16 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+      "no-console": true,
+      "variable-name": {
+        "options": [
+          "allow-leading-underscore"
+        ]
+      }
+    },
+    "rulesDirectory": []
+}
