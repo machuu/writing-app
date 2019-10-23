@@ -19,11 +19,11 @@ class TextEditor {
   private editor: any;
   private defaultElementId: string = "editorjs";
   private elementId: string;
-  private editorElement: HTMLElement;
+  private _element: HTMLElement;
   private defaultDataId: string = "textEditorData";
   private defaultData: any;
   private dataId: string;
-  private editorData: any = {};
+  private _data: any = {};
 
   constructor(elementId: string = null, initData: any = defaultTextEditorData ) {
     if ( elementId == null ) {
@@ -53,12 +53,12 @@ class TextEditor {
   }
 
   public get element() {
-    return this.editorElement;
+    return this._element;
   }
 
   public set element(givenElement: HTMLElement) {
-    if ( this.editorElement == null ) {
-      this.editorElement = givenElement;
+    if ( this._element == null ) {
+      this._element = givenElement;
       console.log(`Setting Text Editor Element to element with id '${givenElement.id}'`);
     } else {
       console.log(`Can not change Text Editor element '${this.element.id}' -> '${givenElement.id}'`);
@@ -109,12 +109,12 @@ class TextEditor {
 
   // return JSON object of Text Editor Data
   public get data() {
-    return this.editorData;
+    return this._data;
   }
 
   // assign JSON object to Text Editor Data
   public set data(data: any) {
-    this.editorData = data;
+    this._data = data;
     this.renderData(this.data);
   }
 
