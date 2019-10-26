@@ -1,0 +1,7 @@
+{
+  "package": "package.json",
+  "project": "tsconfig.json",
+  "extension": ["ts"],
+  "spec": "test/**/*.ts",
+  "require": "ts-node/register"
+}

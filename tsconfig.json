@@ -3,13 +3,20 @@
     "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "esModuleInterop": false,
     "module": "commonjs",
     "noImplicitAny": true,
     "outDir": "public",
     "sourceMap": true,
     "target": "es6",
-    "typeRoots": ["node_modules/@types"],
-    "types": ["core-js", "node"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "core-js",
+      "node",
+      "mocha"
+    ],
     "baseUrl": "."
   },
   "include": [
