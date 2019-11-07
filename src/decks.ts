@@ -1,5 +1,5 @@
-export var cards: any = {};
-export var decks: any = {};
+export let cards: any = {};
+export let decks: any = {};
 
 export interface CardAttribute {
   name: string,
