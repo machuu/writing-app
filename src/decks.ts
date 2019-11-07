@@ -2,25 +2,24 @@ export let cards: any = {};
 export let decks: any = {};
 
 export interface CardAttribute {
-  name: string,
-  value: string,
+  name: string;
+  value: string;
 }
 
 export interface CardJSON {
+  _attributes: CardAttribute[];
+  _description: string;
   _id: string;
   _name: string;
-  _description: string;
   _text: any;
-  _attributes: CardAttribute[];
 }
 
 export class Card {
-  private _id: string // unique ID
-  private _name: string // Descriptive Name
-  private _description: string // Descriptive Name
-  private _text: any    // Text Editor Content: JSON
-  private _attributes: CardAttribute[] // array of Card Attributes
-
+  private _attributes: CardAttribute[] = []; // array of Card Attributes
+  private _id: string; // unique ID
+  private _description: string = ""; // Descriptive Name
+  private _name: string = ""; // Descriptive Name
+  private _text: any = {};   // Text Editor Content: JSON
 
   // Constructor
   constructor(idPrefix: string = "CARD") {
