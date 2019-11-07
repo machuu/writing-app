@@ -42,7 +42,7 @@ export class Card {
 
   // textJSON is JSON from Text Editor
   public get textJSON(): any { return this._text; }
-  public set textJSON(newTextData: any) { this._text = textJSON; }
+  public set textJSON(newTextData: any) { this._text = newTextData; }
 
   // textString is stringified version of textJSON
   // The idea here is to translate between EditorJS data structure and plain strings
