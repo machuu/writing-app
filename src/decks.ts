@@ -87,7 +87,7 @@ export enum DeckType {
   SCENE     = "Scene",
 }
 
-export class Deck extends Card{
+export class Deck extends Card {
   // List of Card IDs in this deck
   private _cardIds: string[];
 
@@ -96,7 +96,6 @@ export class Deck extends Card{
   constructor(deckType: string) {
     super(deckType + "-Deck");
     this._deckType = deckType;
-    // 
     AddDeck(this);
   }
 
@@ -118,9 +117,9 @@ export class Deck extends Card{
     this._cardIds.push( cardId );
   }
 
-  public removeCard(cardId: string) { 
-    this.cardIds = this.cardIds.filter( (element: string) => { 
-      return element !== cardId
+  public removeCard(cardId: string) {
+    this.cardIds = this.cardIds.filter( (element: string) => {
+      return element !== cardId;
     });
   }
 
