@@ -41,8 +41,8 @@ export class Card {
   public set description(newDesc: string) { this._description = newDesc; }
 
   // textJSON is JSON from Text Editor
-  public get textJSON(): any { return this._text};
-  public set textJSON(newTextData: any) {};
+  public get textJSON(): any { return this._text; }
+  public set textJSON(newTextData: any) { this._text = textJSON; }
 
   // textString is stringified version of textJSON
   // The idea here is to translate between EditorJS data structure and plain strings
