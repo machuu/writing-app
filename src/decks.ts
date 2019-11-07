@@ -60,11 +60,11 @@ export class Card {
   public toJSON(): ICardJSON {
     return Object.assign({}, this, {
       // explicitly assign private fields
+      _attributes: this._attributes,
+      _description: this._description,
       _id: this._id,
       _name: this._name,
-      _description: this._description,
       _text: this._text,
-      _attributes: this._attributes,
     });
   }
 
