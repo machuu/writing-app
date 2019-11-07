@@ -68,7 +68,7 @@ export class Card {
     });
   }
 
-  static fromJSON(cardJSON: CardJSON): Card {
+  public static fromJSON(cardJSON: CardJSON): Card {
     // Only let this happen once
     // I think 'static' might satisfy that
 
@@ -77,7 +77,7 @@ export class Card {
     return Object.assign(card, cardJSON);
   }
 
-  static reviver(key: string, value: any): any {
+  public static reviver(key: string, value: any): any {
     return key === "" ? Card.fromJSON(value) : value;
   }
 }
@@ -120,11 +120,11 @@ export class Deck extends Card{
 
   public removeCard(cardId: string) { 
     this.cardIds = this.cardIds.filter( (element: string) => { 
-      return element != cardId
+      return element !== cardId
     });
   }
 
-  newCard(): string {
+  public newCard(): string {
     let newCard: Card = new Card();
     AddCard(newCard);
     this.addCard(newCard.id);
