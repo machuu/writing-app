@@ -21,6 +21,8 @@ export class Card {
   private _text: any    // Text Editor Content: JSON
   private _attributes: CardAttribute[] // array of Card Attributes
 
+
+  // Constructor
   constructor(idPrefix: string = "CARD") {
     this._id = idPrefix + "-" + new Date().toISOString();
     if (idPrefix === 'CARD') {
@@ -29,6 +31,7 @@ export class Card {
     }
   }
 
+  // Accessors
   public get id(): string          { return this._id; }
   public set id(newId: string)     { console.log("Card already has id: " + this.id); }
 
@@ -78,7 +81,6 @@ export class Card {
   static reviver(key: string, value: any): any {
     return key === "" ? Card.fromJSON(value) : value;
   }
-
 }
 
 export enum DeckType {
