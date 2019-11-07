@@ -24,7 +24,7 @@ export class Card {
   // Constructor
   constructor(idPrefix: string = "CARD") {
     this._id = idPrefix + "-" + new Date().toISOString();
-    if (idPrefix === 'CARD') {
+    if (idPrefix === "CARD") {
       // Add this card to global card list
       AddCard(this);
     }
@@ -134,7 +134,7 @@ export class Deck extends Card{
 }
 
 export function ResolveCardId(cardReference: string|Card|Deck) {
-    if ( typeof cardReference === 'string' ) {
+    if ( typeof cardReference === "string" ) {
       return cardReference;
     } else {
       return cardReference.id;
