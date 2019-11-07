@@ -1,13 +1,13 @@
 export let cards: any = {};
 export let decks: any = {};
 
-export interface CardAttribute {
+export interface ICardAttribute {
   name: string;
   value: string;
 }
 
-export interface CardJSON {
-  _attributes: CardAttribute[];
+export interface ICardJSON {
+  _attributes: ICardAttribute[];
   _description: string;
   _id: string;
   _name: string;
@@ -15,7 +15,7 @@ export interface CardJSON {
 }
 
 export class Card {
-  private _attributes: CardAttribute[] = []; // array of Card Attributes
+  private _attributes: ICardAttribute[] = []; // array of Card Attributes
   private _id: string; // unique ID
   private _description: string = ""; // Descriptive Name
   private _name: string = ""; // Descriptive Name
@@ -50,14 +50,14 @@ export class Card {
   public get textString(): string        { return JSON.stringify(this.textJSON); }
   public set textString(newText: string) { this.textJSON = JSON.parse(newText); }
 
-  public get attributes(): CardAttribute[]                { return this._attributes; }
-  public set attributes(cardAttributes: CardAttribute[])  { this._attributes = cardAttributes; }
-  public AddAttribute(newAttribute: CardAttribute) {}
-  public RemoveAttribute(attributeName: string) {}
+  public get attributes(): ICardAttribute[]                { return this._attributes; }
+  public set attributes(cardAttributes: ICardAttribute[])  { this._attributes = cardAttributes; }
+  public AddAttribute(newAttribute: ICardAttribute) { this._attributes.push( newAttribute ); }
+  public RemoveAttribute(attributeName: string) { console.log(`Removing attribute: ${attributeName}`); }
 
   // JSON Helpers
   // per: http://choly.ca/post/typescript-json/
-  public toJSON(): CardJSON {
+  public toJSON(): ICardJSON {
     return Object.assign({}, this, {
       // explicitly assign private fields
       _id: this._id,
@@ -68,7 +68,7 @@ export class Card {
     });
   }
 
-  public static fromJSON(cardJSON: CardJSON): Card {
+  public static fromJSON(cardJSON: ICardJSON): Card {
     // Only let this happen once
     // I think 'static' might satisfy that
 
