@@ -5,6 +5,15 @@
     ],
     "jsRules": {},
     "rules": {
+      "max-classes-per-file": [
+        false
+      ],
+      "member-ordering": [
+        true,
+        {
+          "order": "instance-sandwich"
+        }
+      ],
       "no-console": true,
       "no-var-requires": false,
       "variable-name": {
