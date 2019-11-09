@@ -9,7 +9,7 @@ class NavMenu {
   public  _opened_width: string  = "200px";
   public  _opened_height: string = "100%";
 
-  private element: HTMLElement;
+  private _element: HTMLElement;
   private _open_button: HTMLElement;
   private _close_button: HTMLElement;
   private _toggle_button: HTMLElement;
@@ -17,8 +17,8 @@ class NavMenu {
   private _is_open: boolean = false;
 
   constructor(id: string) {
-    this.element = document.getElementById(id);
-    console.log( "Created button with id: " + this.element.id );
+    this._element = document.getElementById(id);
+    console.log( "Created button with id: " + this._element.id );
 
     // Try initializing NavMenu buttons, if the elements exist
     this.set_open_button(`${id}-button-open`);
@@ -26,6 +26,8 @@ class NavMenu {
     this.set_toggle_button(`${id}-button-toggle`);
   }
 
+  public get element(): HTMLElement { return this._element; }
+  public set element(newElement: HTMLElement) { this._element = newElement; }
   public get id(): string {
     return this.element.id;
   }
