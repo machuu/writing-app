@@ -18,7 +18,7 @@ class NavMenu {
 
   constructor(id: string) {
     this._element = document.getElementById(id);
-    console.log( "Created button with id: " + this._element.id );
+    //console.log( "Created button with id: " + this._element.id );
 
     // Try initializing NavMenu buttons, if the elements exist
     this.set_open_button(`${id}-button-open`);
@@ -31,6 +31,15 @@ class NavMenu {
   public get id(): string {
     return this.element.id;
   }
+
+  public get close_button(): HTMLElement { return this._close_button; }
+  public set close_button(newElement: HTMLElement) { this._close_button = newElement; }
+
+  public get open_button(): HTMLElement { return this._open_button; }
+  public set open_button(newElement: HTMLElement) { this._open_button = newElement; }
+
+  public get toggle_button(): HTMLElement { return this._toggle_button; }
+  public set toggle_button(newElement: HTMLElement) { this._toggle_button = newElement; }
 
   // TODO: Consolidate close/open/toggle buttons
   // make buttons a list, so multiple buttons can exist for the same instance
