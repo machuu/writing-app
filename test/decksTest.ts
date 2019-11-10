@@ -22,9 +22,9 @@ describe("Card Fields", () => {
     card3 = new Card();
   });
 
-  it("should update card state 'cards' array", () => {
-    //card1 = new Card();
-    card1.name = "Card 1"
+  it("should update card state in 'cards' array when card 'name' is changed", () => {
+    // card1 = new Card();
+    card1.name = "Card 1";
     expect( cards[card1.id] ).to.be.equal(card1);
   });
 
