@@ -35,7 +35,10 @@ export class Card {
   public set id(newId: string)     { console.log("Card already has id: " + this.id); }
 
   public get name()                { return this._name; }
-  public set name(newName: string) { this._name = newName; }
+  public set name(newName: string) {
+    this._name = newName;
+    this.updateGlobal();
+  }
 
   public get description()                { return this._description; }
   public set description(newDesc: string) { this._description = newDesc; }
@@ -54,6 +57,10 @@ export class Card {
   public set attributes(cardAttributes: ICardAttribute[])  { this._attributes = cardAttributes; }
   public AddAttribute(newAttribute: ICardAttribute) { this._attributes.push( newAttribute ); }
   public RemoveAttribute(attributeName: string) { console.log(`Removing attribute: ${attributeName}`); }
+
+  public updateGlobal(): void {
+    cards[this.id] = this;
+  }
 
   // JSON Helpers
   // per: http://choly.ca/post/typescript-json/
