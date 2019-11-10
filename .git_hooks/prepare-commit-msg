@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+# If this is an "--amend" commit, skip
+if ps -ocommand= -p $PPID | grep -q -e '--amend' ; then
+	IS_AMEND=true
+else
+	IS_AMEND=false
+fi
+
+# Include any branches for which you wish to disable this script
+if [ -z "$BRANCHES_TO_SKIP" ]; then
+  BRANCHES_TO_SKIP=(master develop staging test)
+fi
+
+# Get the current branch name and check if it is excluded
+BRANCH_NAME=$(git symbolic-ref --short HEAD)
+BRANCH_EXCLUDED=$(printf "%s\n" "${BRANCHES_TO_SKIP[@]}" | grep -c "^$BRANCH_NAME$")
+
+BRANCH_LABEL_REGEX="^([a-zA-Z0-9]+)-(#[0-9]+)"
+if [[ $BRANCH_NAME =~ $BRANCH_LABEL_REGEX ]] ; then
+	BRANCH_TYPE="${BASH_REMATCH[1]}"
+	ISSUE_NUMBER="${BASH_REMATCH[2]}"
+fi
+
+if   [[ $BRANCH_EXCLUDED -eq 1 ]] || $IS_AMEND ; then 
+	# Don't do anything
+	exit 0
+fi
+
+if [[ ${BRANCH_TYPE-notfound} != "notfound" ]] ; then
+	# Initialize commit message line
+	sed \
+		-i.bak \
+		-e "1s/^/$BRANCH_TYPE: \n\n\n/" \
+		"$1"
+fi
+
+if ! grep -q "^refs ${ISSUE_NUMBER-notfound}" "$1" ; then
+	# Add issue reference to end of commit message file
+	sed \
+		-i.bak \
+		-e "\$arefs $ISSUE_NUMBER" \
+		"$1"
+fi
