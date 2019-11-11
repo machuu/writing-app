@@ -18,7 +18,6 @@ class NavMenu {
 
   constructor(id: string) {
     this._element = document.getElementById(id);
-    //console.log( "Created button with id: " + this._element.id );
 
     // Try initializing NavMenu buttons, if the elements exist
     this.set_open_button(`${id}-button-open`);
