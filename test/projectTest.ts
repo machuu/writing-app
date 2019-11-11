@@ -10,6 +10,14 @@ describe("Create a new Project", () => {
   });
 });
 
+describe("A Project has Decks", () => {
+  it("should be able to create a new Deck", () => {
+    let project1: Project = new Project();
+    project1.newDeck("Scene");
+    expect(project1.decks).to.not.equal("");
+  });
+});
+
 /*
 describe("", () => {
   beforeEach( () => {
