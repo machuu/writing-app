@@ -32,6 +32,14 @@ describe("Card Fields", () => {
     expect( cards[card1.id] ).to.be.equal(card1);
   });
 
+  it("should update card state in 'cards' array when card 'attributes' is changed", () => {
+    card1.attributes = [
+      { "attribute1": "Card 1 Attribute 1"},
+      { "attribute2": "Card 1 Attribute 2"},
+    ];
+    expect( cards[card1.id] ).to.be.equal(card1);
+  });
+
 });
 
 /*
