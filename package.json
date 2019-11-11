@@ -6,7 +6,7 @@
   "scripts": {
     "build": "browserify -p tslintify -p tsify src/index.ts -o public/app.bundle.js",
     "build-debug": "npm run browserify --debug",
-    "watchify": "watchify -v -p tslintify -p tsify src/index.ts -o public/app.bundle.js",
+    "watchify": "watchify -v -p tsify src/index.ts -o public/app.bundle.js",
     "watchify-debug": "npm run watchify --debug",
     "start": "node express.js",
     "start-bg": "node express.js &",
