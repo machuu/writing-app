@@ -31,8 +31,10 @@ export class Card {
   }
 
   // Accessors
-  public get id(): string          { return this._id; }
-  public set id(newId: string)     { console.log("Card already has id: " + this.id); }
+  public get id(): string      { return this._id; }
+  public set id(newId: string) {
+    console.log("Card already has id: " + this.id);
+  }
 
   public get name()                { return this._name; }
   public set name(newName: string) {
@@ -41,11 +43,17 @@ export class Card {
   }
 
   public get description()                { return this._description; }
-  public set description(newDesc: string) { this._description = newDesc; }
+  public set description(newDesc: string) {
+    this._description = newDesc;
+    this.updateGlobal();
+  }
 
   // textJSON is JSON from Text Editor
   public get textJSON(): any { return this._text; }
-  public set textJSON(newTextData: any) { this._text = newTextData; }
+  public set textJSON(newTextData: any) {
+    this._text = newTextData;
+    this.updateGlobal();
+  }
 
   // textString is stringified version of textJSON
   // The idea here is to translate between EditorJS data structure and plain strings
@@ -54,9 +62,19 @@ export class Card {
   public set textString(newText: string) { this.textJSON = JSON.parse(newText); }
 
   public get attributes(): ICardAttribute[]                { return this._attributes; }
-  public set attributes(cardAttributes: ICardAttribute[])  { this._attributes = cardAttributes; }
-  public AddAttribute(newAttribute: ICardAttribute) { this._attributes.push( newAttribute ); }
-  public RemoveAttribute(attributeName: string) { console.log(`Removing attribute: ${attributeName}`); }
+  public set attributes(cardAttributes: ICardAttribute[])  {
+    this._attributes = cardAttributes;
+    this.updateGlobal();
+  }
+
+  public AddAttribute(newAttribute: ICardAttribute) {
+    this._attributes.push( newAttribute );
+    this.updateGlobal();
+  }
+  public RemoveAttribute(attributeName: string) {
+    console.log(`Removing attribute: ${attributeName}`);
+    this.updateGlobal();
+  }
 
   public updateGlobal(): void {
     cards[this.id] = this;
