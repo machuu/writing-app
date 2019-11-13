@@ -19,4 +19,10 @@ export class Project extends Card {
   public set decks(deckList: Deck[]) {
     this.deckIds = deckList.map( (deck: Deck): string => { return deck.id; });
   }
+
+  public newDeck(deckType: string): string {
+    let newDeck: Deck = new Deck(deckType);
+    this._deckIds.push(newDeck.id);
+    return newDeck.id;
+  }
 }
