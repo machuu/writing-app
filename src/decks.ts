@@ -147,7 +147,11 @@ export class Deck extends Card {
     return newCard.id;
   }
 
-  public addCard(cardId: string) {
+  public addCard(card: Card) {
+    this._cardIds.push( card.id );
+  }
+
+  public addCardId(cardId: string) {
     this._cardIds.push( cardId );
   }
 

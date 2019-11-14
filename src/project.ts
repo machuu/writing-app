@@ -27,4 +27,11 @@ export class Project extends Card {
     this._deckIds.push(newDeck.id);
     return newDeck.id;
   }
+
+  public addDeck(deck: Deck) {
+    this.addDeckId( deck.id );
+  }
+  public addDeckId( deckId: string ) {
+    this._deckIds.push( deckId );
+  }
 }
