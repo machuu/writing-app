@@ -11,13 +11,15 @@ export class Project extends Card {
   public get deckIds(): string[] { return this._deckIds; }
   public set deckIds(newDeckIds: string[]) { this._deckIds = newDeckIds; }
 
-  public get decks(): Deck[] {
-    return this.deckIds.map( (deckId: string): Deck => {
-      return decks[deckId];
+  public get decks(): any {
+    let decksObject: any = {};
+    this.deckIds.forEach( (deckId: string) => {
+      decksObject[deckId] = decks[deckId]
     });
+    return decksObject;
   }
-  public set decks(deckList: Deck[]) {
-    this.deckIds = deckList.map( (deck: Deck): string => { return deck.id; });
+  public set decks(decksObject: any) {
+    this.deckIds = decksObject.map( (deckId: string, deck: Deck): string => { return deckId; });
   }
 
   public newDeck(deckType: string): string {
