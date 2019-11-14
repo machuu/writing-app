@@ -23,7 +23,16 @@ export class Card {
 
   // Constructor
   constructor(idPrefix: string = "CARD") {
-    this._id = idPrefix + "-" + new Date().toISOString();
+    // ID is a combination of:
+    //   - Prefix - description of what kind of Card this is
+    //   - Datetime - ISO Datetime when Card is created
+    //   - Random Suffix - to differentiate cards created in the same millisecond
+    this._id = idPrefix
+      + "-"
+      + new Date().toISOString()
+      + "_"
+      + Math.random().toString(36).substring(2,6);
+
     if (idPrefix === "CARD") {
       // Add this card to global card list
       AddCard(this);
