@@ -18,12 +18,12 @@ describe("A Project has Decks", () => {
     let deck2: Deck;
 
     beforeEach( () => {
+      project1 = new Project();
       deck1 = new Deck("Scene");
       deck2 = new Deck("Reference");
     });
 
     it("should be able to add one Deck to a new Project, using an array of deckIds", () => {
-      let project1: Project = new Project();
       let newDeckIdList: string[] = [ deck1.id ];
       let newDeckList: any = {};
       newDeckList[deck1.id] = deck1;
@@ -34,7 +34,6 @@ describe("A Project has Decks", () => {
     });
 
     it("should be able to add multiple Decks to a new Project, using an array of deckIds", () => {
-      let project1: Project = new Project();
       let newDeckIdList: string[] = [ deck1.id, deck2.id ];
       let newDeckList: any = {};
       newDeckList[deck1.id] = deck1;
