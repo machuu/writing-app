@@ -56,12 +56,12 @@ describe("A Deck has Cards", () => {
     let card2: Card;
 
     beforeEach( () => {
-      card1 = new Card("Scene");
-      card2 = new Card("Reference");
+      card1 = new Card();
+      card2 = new Card();
     });
 
     it("should be able to add one Card to a new Deck, using an array of cardIds", () => {
-      let deck1: Deck = new Deck();
+      let deck1: Deck = new Deck("Scene");
       let newCardIdList: string[] = [ card1.id ];
       let newCardList: any = {};
       newCardList[card1.id] = card1;
@@ -72,7 +72,7 @@ describe("A Deck has Cards", () => {
     });
 
     it("should be able to add multiple Cards to a new Deck, using an array of cardIds", () => {
-      let deck1: Deck = new Deck();
+      let deck1: Deck = new Deck("Scene");
       let newCardIdList: string[] = [ card1.id, card2.id ];
       let newCardList: any = {};
       newCardList[card1.id] = card1;
@@ -93,8 +93,8 @@ describe("A Deck has Cards", () => {
     let newCardId: string;
 
     before( () => {
-      deck1  = new Deck();
-      newCardId = deck1.newCard("Scene");
+      deck1  = new Deck("Scene");
+      newCardId = deck1.newCard();
       newCard   = deck1.cards[newCardId];
     });
 
