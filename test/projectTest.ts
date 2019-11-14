@@ -43,6 +43,20 @@ describe("A Project has Decks", () => {
       expect(project1.deckIds).to.be.deep.equal(newDeckIdList);
       expect(project1.decks).to.include(newDeckList);
     });
+
+    it("should be able to add one Deck with Project.addDeck(), and only contain that one Deck", () => {
+      project1.addDeck(deck1)
+      expect(project1.deckIds).to.include(deck1.id);
+      expect(project1.decks[deck1.id]).to.be.deep.equal(deck1);
+      expect(project1.deckIds).to.not.include(deck2.id);
+    });
+
+    it("should be able to add one Deck with Project.addDeckId(), and only contain that one Deck", () => {
+      project1.addDeckId(deck2.id)
+      expect(project1.deckIds).to.include(deck2.id);
+      expect(project1.decks[deck2.id]).to.be.deep.equal(deck2);
+      expect(project1.deckIds).to.not.include(deck1.id);
+    });
   });
 
   context("When a Project exists, with no Decks", () => {

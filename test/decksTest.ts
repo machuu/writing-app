@@ -81,6 +81,20 @@ describe("A Deck has Cards", () => {
       expect(deck1.cardIds).to.be.deep.equal(newCardIdList);
       expect(deck1.cards).to.include(newCardList);
     });
+
+    it("should be able to add one Card with Deck.addCard(), and only contain that one Card", () => {
+      deck1.addCard(card1);
+      expect(deck1.cardIds).to.include(card1.id);
+      expect(deck1.cards[card1.id]).to.be.deep.equal(card1);
+      expect(deck1.cardIds).to.not.include(card2.id);
+    });
+
+    it("should be able to add one Card with Deck.addCardId(), and only contain that one Card", () => {
+      deck1.addCardId(card2.id);
+      expect(deck1.cardIds).to.include(card2.id);
+      expect(deck1.cards[card2.id]).to.be.deep.equal(card2);
+      expect(deck1.cardIds).to.not.include(card1.id);
+    });
   });
 
   context("When a Deck exists, with no Cards", () => {
