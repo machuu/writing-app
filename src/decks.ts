@@ -114,7 +114,7 @@ export enum DeckType {
 
 export class Deck extends Card {
   // List of Card IDs in this deck
-  private _cardIds: string[];
+  private _cardIds: string[] = [];
 
   private _deckType: string;
 
