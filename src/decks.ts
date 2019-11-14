@@ -114,7 +114,7 @@ export enum DeckType {
 
 export class Deck extends Card {
   // List of Card IDs in this deck
-  private _cardIds: string[];
+  private _cardIds: string[] = [];
 
   private _deckType: string;
 
@@ -130,12 +130,21 @@ export class Deck extends Card {
   public get cardIds(): string[]          { return this._cardIds; }
   public set cardIds(cardIdList: string[] ) { this._cardIds = cardIdList; }
 
-  public get cards(): Card[] {
-    return this.cardIds.map( (cardId: string): Card => { return cards[cardId]; });
+  public get cards(): any {
+    let cardsObject: any = {};
+    this.cardIds.forEach( (cardId: string) => {
+      cardsObject[cardId] = cards[cardId]
+    });
+    return cardsObject;
+  }
+  public set cards(cardsObject: any) {
+    this.cardIds = cardsObject.map( (cardId: string, card: Card): string => { return cardId; });
   }
 
-  public set cards(cardArray: Card[]) {
-    this.cardIds = cardArray.map( (card: Card): string => { return card.id; });
+  public newCard(): string {
+    let newCard: Card = new Card();
+    this._cardIds.push(newCard.id);
+    return newCard.id;
   }
 
   public addCard(cardId: string) {
@@ -146,13 +155,6 @@ export class Deck extends Card {
     this.cardIds = this.cardIds.filter( (element: string) => {
       return element !== cardId;
     });
-  }
-
-  public newCard(): string {
-    let newCard: Card = new Card();
-    AddCard(newCard);
-    this.addCard(newCard.id);
-    return newCard.id;
   }
 
 }
