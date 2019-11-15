@@ -116,8 +116,8 @@ describe("A Project has Decks", () => {
       let sceneDecksObject: any = {};
       sceneDecksObject[sceneDeck1.id] = sceneDeck1;
       sceneDecksObject[sceneDeck2.id] = sceneDeck2;
-      expect( project1.deckIds("Scene") ).to.be.deep.equal(sceneDeckIds);
-      expect( project1.decks("Scene")   ).to.be.deep.equal(sceneDecksObject);
+      expect( project1.sceneDeckIds ).to.be.deep.equal(sceneDeckIds);
+      expect( project1.sceneDecks   ).to.be.deep.equal(sceneDecksObject);
     });
 
 
@@ -128,8 +128,8 @@ describe("A Project has Decks", () => {
       let referenceDecksObject: any = {};
       referenceDecksObject[referenceDeck1.id] = referenceDeck1;
       referenceDecksObject[referenceDeck2.id] = referenceDeck2;
-      expect( project1.deckIds("Reference") ).to.be.deep.equal(referenceDeckIds);
-      expect( project1.decks("Reference")   ).to.be.deep.equal(referenceDecksObject);
+      expect( project1.referenceDeckIds ).to.be.deep.equal(referenceDeckIds);
+      expect( project1.referenceDecks   ).to.be.deep.equal(referenceDecksObject);
     });
   });
 });
