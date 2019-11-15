@@ -1,6 +1,7 @@
-import { Card, Deck } from "./decks";
+import BaseCard from "./baseCard";
+import Deck from "./deck";
 
-export class Project extends Card {
+export class Project extends BaseCard {
   
   private _deckIds: string[] = [];
 
@@ -8,11 +9,18 @@ export class Project extends Card {
 
   constructor() {
     super("Project")
+    this.updateGlobal();
+  }
+
+  private updateGlobal(): void {
     Project._projects[this.id] = this;
   }
 
   public get deckIds(): string[] { return this._deckIds; }
-  public set deckIds(newDeckIds: string[]) { this._deckIds = newDeckIds; }
+  public set deckIds(newDeckIds: string[]) {
+    this._deckIds = newDeckIds;
+    this.updateGlobal();
+  }
 
   public get decks(): any {
     let decksObject: any = {};
@@ -24,11 +32,13 @@ export class Project extends Card {
 
   public set decks(decksObject: any) {
     this.deckIds = decksObject.map( (deckId: string, deck: Deck): string => { return deckId; });
+    this.updateGlobal();
   }
 
   public newDeck(deckType: string): string {
     let newDeck: Deck = new Deck(deckType);
     this._deckIds.push(newDeck.id);
+    this.updateGlobal();
     return newDeck.id;
   }
 
@@ -37,6 +47,7 @@ export class Project extends Card {
   }
   public addDeckId( deckId: string ) {
     this._deckIds.push( deckId );
+    this.updateGlobal();
   }
 
   public static get projects(): any {
@@ -46,3 +57,5 @@ export class Project extends Card {
     Project._projects = projectsObject;
   }
 }
+
+export default Project;

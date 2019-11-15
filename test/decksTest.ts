@@ -1,7 +1,8 @@
 import { expect } from "chai";
 import "mocha";
 
-import { Card, Deck } from "../src/decks";
+import Card from "../src/card";
+import Deck from "../src/deck";
 
 describe("Create a new Card", () => {
   it("should create a new default Card instance", () => {

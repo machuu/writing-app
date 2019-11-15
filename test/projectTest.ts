@@ -1,8 +1,8 @@
 import { expect } from "chai";
 import "mocha";
 
-import { Project } from "../src/project";
-import { Deck } from "../src/decks";
+import Project from "../src/project";
+import Deck from "../src/deck";
 
 describe("Create a new Project", () => {
   it("should create a new Project instance", () => {
