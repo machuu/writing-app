@@ -21,13 +21,6 @@ export class Card extends BaseCard {
     Card.cards[this.id] = this;
   }
 
-  // textJSON is JSON from Text Editor
-  public get textJSON(): any { return this._text; }
-  public set textJSON(newTextData: any) {
-    this._text = newTextData;
-    this.updateGlobal();
-  }
-
   // JSON Helpers
   // per: http://choly.ca/post/typescript-json/
   public toJSON(): ICardJSON {
