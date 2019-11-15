@@ -2,7 +2,7 @@ import { expect } from "chai";
 import "mocha";
 
 import { Project } from "../src/project";
-import { Deck, decks } from "../src/decks";
+import { Deck } from "../src/decks";
 
 describe("Create a new Project", () => {
   it("should create a new Project instance", () => {
@@ -83,7 +83,7 @@ describe("A Project has Decks", () => {
     });
 
     it("and new deck is in global decks list", () => {
-      expect(decks).to.include(project1.decks);
+      expect(Deck.decks).to.include(project1.decks);
     });
   });
 });
