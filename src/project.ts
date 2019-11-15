@@ -12,7 +12,7 @@ export class Project extends BaseCard {
     this.updateGlobal();
   }
 
-  private updateGlobal(): void {
+  protected updateGlobal(): void {
     Project._projects[this.id] = this;
   }
 

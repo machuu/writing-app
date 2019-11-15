@@ -17,7 +17,7 @@ export class Card extends BaseCard {
     this.updateGlobal();
   }
 
-  private updateGlobal(): void {
+  protected updateGlobal(): void {
     Card.cards[this.id] = this;
   }
 

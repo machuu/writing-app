@@ -1,11 +1,6 @@
 import BaseCard from "./baseCard";
 import Card from "./card";
 
-export enum DeckType {
-  REFERENCE = "Reference",
-  SCENE     = "Scene",
-}
-
 export class Deck extends BaseCard {
   // List of Card IDs in this deck
   private _cardIds: string[] = [];
@@ -19,15 +14,21 @@ export class Deck extends BaseCard {
     this.updateGlobal();
   }
 
-  private updateGlobal(): void {
+  protected updateGlobal(): void {
     Deck.decks[this.id] = this;
   }
 
   public get deckType()                  { return this._deckType; }
-  public set deckType(newType: string) { this._deckType = newType; }
+  public set deckType(newType: string) {
+    this._deckType = newType;
+    this.updateGlobal();
+  }
 
   public get cardIds(): string[]          { return this._cardIds; }
-  public set cardIds(cardIdList: string[] ) { this._cardIds = cardIdList; }
+  public set cardIds(cardIdList: string[] ) {
+    this._cardIds = cardIdList;
+    this.updateGlobal();
+  }
 
   public get cards(): any {
     let cardsObject: any = {};
