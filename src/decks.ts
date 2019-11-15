@@ -1,6 +1,3 @@
-export let cards: any = {};
-export let decks: any = {};
-
 export interface ICardAttribute {
   name: string;
   value: string;
@@ -21,6 +18,8 @@ export class Card {
   private _name: string = ""; // Descriptive Name
   private _text: any = {};   // Text Editor Content: JSON
 
+  private static _cards: any = {};
+
   // Constructor
   constructor(idPrefix: string = "CARD") {
     // ID is a combination of:
@@ -35,7 +34,7 @@ export class Card {
 
     if (idPrefix === "CARD") {
       // Add this card to global card list
-      AddCard(this);
+      Card.cards[this.id] = this;
     }
   }
 
@@ -86,7 +85,7 @@ export class Card {
   }
 
   public updateGlobal(): void {
-    cards[this.id] = this;
+    Card.cards[this.id] = this;
   }
 
   // JSON Helpers
@@ -114,6 +113,13 @@ export class Card {
   public static reviver(key: string, value: any): any {
     return key === "" ? Card.fromJSON(value) : value;
   }
+
+  public static get cards(): any {
+    return Card._cards;
+  }
+  public static set cards(cardsObject: any) {
+    Card._cards = cardsObject;
+  }
 }
 
 export enum DeckType {
@@ -127,10 +133,12 @@ export class Deck extends Card {
 
   private _deckType: string;
 
+  private static _decks: any = {};
+
   constructor(deckType: string) {
     super(deckType + "-Deck");
     this._deckType = deckType;
-    AddDeck(this);
+    Deck.decks[this.id] = this;
   }
 
   public get deckType()                  { return this._deckType; }
@@ -142,7 +150,7 @@ export class Deck extends Card {
   public get cards(): any {
     let cardsObject: any = {};
     this.cardIds.forEach( (cardId: string) => {
-      cardsObject[cardId] = cards[cardId]
+      cardsObject[cardId] = Card.cards[cardId]
     });
     return cardsObject;
   }
@@ -170,30 +178,12 @@ export class Deck extends Card {
     });
   }
 
-}
-
-export function ResolveCardId(cardReference: string|Card|Deck) {
-    if ( typeof cardReference === "string" ) {
-      return cardReference;
-    } else {
-      return cardReference.id;
-    }
-}
-
-export function AddCard(card: Card) {
-  cards[card.id] = card;
-}
-
-export function GetCard(cardId: string): Card {
-  return cards[cardId];
-}
-
-export function AddDeck(deck: Deck) {
-  decks[deck.id] = deck;
-}
-
-export function GetDeck(deckId: string): Deck {
-  return decks[deckId];
+  public static get decks(): any {
+    return Deck._decks;
+  }
+  public static set decks(decksObject: any) {
+    Deck._decks = decksObject;
+  }
 }
 
 export default Deck;

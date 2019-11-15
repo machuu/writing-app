@@ -1,11 +1,14 @@
-import { Card, cards, Deck, decks } from "./decks";
+import { Card, Deck } from "./decks";
 
 export class Project extends Card {
   
   private _deckIds: string[] = [];
 
+  private static _projects: any = {};
+
   constructor() {
     super("Project")
+    Project._projects[this.id] = this;
   }
 
   public get deckIds(): string[] { return this._deckIds; }
@@ -14,10 +17,11 @@ export class Project extends Card {
   public get decks(): any {
     let decksObject: any = {};
     this.deckIds.forEach( (deckId: string) => {
-      decksObject[deckId] = decks[deckId]
+      decksObject[deckId] = Deck.decks[deckId]
     });
     return decksObject;
   }
+
   public set decks(decksObject: any) {
     this.deckIds = decksObject.map( (deckId: string, deck: Deck): string => { return deckId; });
   }
@@ -33,5 +37,12 @@ export class Project extends Card {
   }
   public addDeckId( deckId: string ) {
     this._deckIds.push( deckId );
+  }
+
+  public static get projects(): any {
+    return Project._projects;
+  }
+  public static set projects(projectsObject: any) {
+    Project._projects = projectsObject;
   }
 }

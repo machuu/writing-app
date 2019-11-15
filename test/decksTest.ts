@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import "mocha";
 
-import { Card, cards, Deck, decks } from "../src/decks";
+import { Card, Deck } from "../src/decks";
 
 describe("Create a new Card", () => {
   it("should create a new default Card instance", () => {
@@ -24,12 +24,12 @@ describe("Card Fields", () => {
 
   it("should update card state in 'cards' array when card 'name' is changed", () => {
     card1.name = "Card 1";
-    expect( cards[card1.id] ).to.be.equal(card1);
+    expect( Card.cards[card1.id] ).to.be.equal(card1);
   });
 
   it("should update card state in 'cards' array when card 'description' is changed", () => {
     card1.description = "Card 1 Description";
-    expect( cards[card1.id] ).to.be.equal(card1);
+    expect( Card.cards[card1.id] ).to.be.equal(card1);
   });
 
   it("should update card state in 'cards' array when card 'attributes' is changed", () => {
@@ -37,7 +37,7 @@ describe("Card Fields", () => {
       { "attribute1": "Card 1 Attribute 1"},
       { "attribute2": "Card 1 Attribute 2"},
     ];
-    expect( cards[card1.id] ).to.be.equal(card1);
+    expect( Card.cards[card1.id] ).to.be.equal(card1);
   });
 
 });
@@ -121,7 +121,7 @@ describe("A Deck has Cards", () => {
     });
 
     it("and new card is in global cards list", () => {
-      expect(cards).to.include(deck1.cards);
+      expect(Card.cards).to.include(deck1.cards);
     });
   });
 });
