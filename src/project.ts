@@ -70,10 +70,10 @@ export class Project extends BaseCard {
     this.updateGlobal();
     return newDeck.id;
   }
-  public newReferenceDeck(): string[] {
+  public newReferenceDeck(): string {
     return this.newDeck("Reference");
   }
-  public newSceneDeck(): string[] {
+  public newSceneDeck(): string {
     return this.newDeck("Scene");
   }
 
