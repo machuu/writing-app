@@ -31,7 +31,7 @@ if [[ ${BRANCH_TYPE-notfound} != "notfound" ]] ; then
 	# Initialize commit message line
 	sed \
 		-i.bak \
-		-e "1s/^/$BRANCH_TYPE: \n\n\n/" \
+		-e "1s/^/$BRANCH_TYPE: \n/" \
 		"$1"
 fi
 
