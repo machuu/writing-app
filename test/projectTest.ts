@@ -96,38 +96,60 @@ describe("A Project has Decks", () => {
     let sceneDeck2: Deck;
     let referenceDeck1: Deck;
     let referenceDeck2: Deck;
+    let allDeckIds: string[] = [];
+    let allDecksObject: any = {};
+    let referenceDeckIds: string[] = [];
+    let referenceDecksObject: any = {};
+    let sceneDeckIds: string[] = [];
+    let sceneDecksObject: any = {};
 
     beforeEach( () => {
       project1  = new Project();
-      let sceneDeck1Id: string     = project1.newDeck("Scene");
-      let sceneDeck2Id: string     = project1.newDeck("Scene");
       let referenceDeck1Id: string = project1.newDeck("Reference");
       let referenceDeck2Id: string = project1.newDeck("Reference");
-      sceneDeck1       = project1.decks[sceneDeck1Id];
-      sceneDeck2       = project1.decks[sceneDeck2Id];
+      let sceneDeck1Id: string     = project1.newDeck("Scene");
+      let sceneDeck2Id: string     = project1.newDeck("Scene");
       referenceDeck1   = project1.decks[referenceDeck1Id];
       referenceDeck2   = project1.decks[referenceDeck2Id];
+      sceneDeck1       = project1.decks[sceneDeck1Id];
+      sceneDeck2       = project1.decks[sceneDeck2Id];
+
+      allDeckIds.push(referenceDeck1.id);
+      allDeckIds.push(referenceDeck2.id);
+      allDeckIds.push(sceneDeck1.id);
+      allDeckIds.push(sceneDeck2.id);
+      allDecksObject[referenceDeck1.id] = referenceDeck1;
+      allDecksObject[referenceDeck2.id] = referenceDeck2;
+      allDecksObject[sceneDeck1.id] = sceneDeck1;
+      allDecksObject[sceneDeck2.id] = sceneDeck2;
+
+      referenceDeckIds.push(referenceDeck1.id);
+      referenceDeckIds.push(referenceDeck2.id);
+      referenceDecksObject[referenceDeck1.id] = referenceDeck1;
+      referenceDecksObject[referenceDeck2.id] = referenceDeck2;
+
+      sceneDeckIds.push(sceneDeck1.id);
+      sceneDeckIds.push(sceneDeck2.id);
+      sceneDecksObject[sceneDeck1.id] = sceneDeck1;
+      sceneDecksObject[sceneDeck2.id] = sceneDeck2;
+    });
+
+    afterEach( () => {
+      allDeckIds = [];
+      allDecksObject = {};
+      referenceDeckIds = [];
+      referenceDecksObject = {};
+      sceneDeckIds = [];
+      sceneDecksObject = {};
     });
 
     it("should only return Scene Decks", () => {
-      let sceneDeckIds: string[] = [];
-      sceneDeckIds.push(sceneDeck1.id);
-      sceneDeckIds.push(sceneDeck2.id);
-      let sceneDecksObject: any = {};
-      sceneDecksObject[sceneDeck1.id] = sceneDeck1;
-      sceneDecksObject[sceneDeck2.id] = sceneDeck2;
       expect( project1.sceneDeckIds ).to.be.deep.equal(sceneDeckIds);
       expect( project1.sceneDecks   ).to.be.deep.equal(sceneDecksObject);
     });
 
 
     it("should only return Reference Decks", () => {
-      let referenceDeckIds: string[] = [];
-      referenceDeckIds.push(referenceDeck1.id);
-      referenceDeckIds.push(referenceDeck2.id);
-      let referenceDecksObject: any = {};
-      referenceDecksObject[referenceDeck1.id] = referenceDeck1;
-      referenceDecksObject[referenceDeck2.id] = referenceDeck2;
       expect( project1.referenceDeckIds ).to.be.deep.equal(referenceDeckIds);
       expect( project1.referenceDecks   ).to.be.deep.equal(referenceDecksObject);
     });
