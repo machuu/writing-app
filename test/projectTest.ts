@@ -87,7 +87,7 @@ describe("A Project has Decks", () => {
     });
   });
 
-  context("When a Project exists, with multiple decks", () => {
+  context("When a Project exists, with 2 Reference and 2 Scene decks", () => {
     // declare variables here, so they are in scope during it()
     // after being set in beforeEach()
 
@@ -143,13 +143,20 @@ describe("A Project has Decks", () => {
       sceneDecksObject = {};
     });
 
-    it("should only return Scene Decks", () => {
+    it("should return 4 Decks", () => {
+      expect( project1.deckIds ).to.be.an('array').that.has.lengthOf(4);
+      expect( project1.deckIds ).to.be.deep.equal(allDeckIds);
+      expect( project1.decks   ).to.be.deep.equal(allDecksObject);
+    });
+
+    it("should return only 2 Scene Decks", () => {
+      expect( project1.sceneDeckIds ).to.be.an('array').that.has.lengthOf(2);
       expect( project1.sceneDeckIds ).to.be.deep.equal(sceneDeckIds);
       expect( project1.sceneDecks   ).to.be.deep.equal(sceneDecksObject);
     });
 
 
-    it("should only return Reference Decks", () => {
+    it("should return only 2 Reference Decks", () => {
       expect( project1.referenceDeckIds ).to.be.deep.equal(referenceDeckIds);
       expect( project1.referenceDecks   ).to.be.deep.equal(referenceDecksObject);
     });
