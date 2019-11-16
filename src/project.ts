@@ -50,7 +50,7 @@ export class Project extends BaseCard {
 
   // Deck setter/getters
   public set decks(decksObject: any) {
-    this.deckIds = convertDecksToDeckIds(decksObject);
+    this.deckIds = this.convertDecksToDeckIds(decksObject);
     this.updateGlobal();
   }
   public get decks(): any {
