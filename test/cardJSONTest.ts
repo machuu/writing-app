@@ -16,7 +16,7 @@ describe("Serialize/Deserialize", () => {
       _description: 'Card 2 Description',
       _name: 'Card 2 Name',
       _text: {},
-      _id: 'Card-2019-11-18T10:19:09.057Z_asdf'
+      _id: 'Card-2019-11-18T10:19:09.057Z_hjkl'
   }
   let card1: Card;
   let card2: Card;
