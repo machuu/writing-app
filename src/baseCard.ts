@@ -1,10 +1,5 @@
-export interface IAttribute {
-  name: string;
-  value: any;
-}
-
 export abstract class BaseCard {
-  protected _attributes: IAttribute[] = []; // array of Card Attributes
+  protected _attributes: any = {}; // array of Card Attributes
   protected _id: string; // unique ID
   protected _description: string = ""; // Descriptive Name
   protected _name: string = ""; // Descriptive Name
@@ -45,24 +40,24 @@ export abstract class BaseCard {
   // textString is stringified version of textJSON
   // The idea here is to translate between EditorJS data structure and plain strings
   // ... this is probably making it too complicated
-  public get textString(): string        { return JSON.stringify(this.textJSON); }
-  public set textString(newText: string) { this.textJSON = JSON.parse(newText); }
+  public get textString(): string        { return JSON.stringify(this.text); }
+  public set textString(newText: string) { this.text = JSON.parse(newText); }
 
-  // textJSON is JSON from Text Editor
-  public get textJSON(): any { return this._text; }
-  public set textJSON(newTextData: any) {
+  // text is JSON from Text Editor
+  public get text(): any { return this._text; }
+  public set text(newTextData: any) {
     this._text = newTextData;
     this.updateGlobal();
   }
 
-  public get attributes(): IAttribute[]                { return this._attributes; }
-  public set attributes(cardAttributes: IAttribute[])  {
+  public get attributes(): any                { return this._attributes; }
+  public set attributes(cardAttributes: any)  {
     this._attributes = cardAttributes;
     this.updateGlobal();
   }
 
-  public AddAttribute(newAttribute: IAttribute) {
-    this._attributes.push( newAttribute );
+  public AddAttribute(newAttributeName: string, newAttributeValue: any) {
+    this._attributes[newAttributeName] =  newAttributeValue;
     this.updateGlobal();
   }
   public RemoveAttribute(attributeName: string) {

@@ -1,6 +1,15 @@
 import BaseCard from "./baseCard";
 import Card from "./card";
 
+export interface IDeckJSON {
+  _attributes: any;
+  _cardIds: string[];
+  _description: string;
+  _id: string;
+  _name: string;
+  _text: any;
+}
+
 export class Deck extends BaseCard {
   // List of Card IDs in this deck
   private _cardIds: string[] = [];
@@ -65,6 +74,32 @@ export class Deck extends BaseCard {
     });
     this.updateGlobal();
   }
+
+  // JSON Helpers
+  // per: http://choly.ca/post/typescript-json/
+  public toJSON(): IDeckJSON {
+    return Object.assign({}, this, {
+      // explicitly assign protected fields
+      _attributes:  this._attributes,
+      _cardIds:     this._cardIds,
+      _description: this._description,
+      _id:          this._id,
+      _name:        this._name,
+      _text:        this._text,
+    });
+  }
+
+  public static fromJSON(deckJSON: IDeckJSON): Deck {
+    // Assign JSON to new Deck object
+    let deckAssigned: Deck  = Object.assign(Object.create(Deck.prototype), deckJSON);
+    Deck.decks[deckAssigned.id] = deckAssigned;
+    return deckAssigned;
+  }
+
+  public static reviver(key: string, value: any): any {
+    return key === "" ? Deck.fromJSON(value) : value;
+  }
+
 
   public static get decks(): any {
     return Deck._decks;

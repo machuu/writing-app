@@ -1,6 +1,15 @@
 import BaseCard from "./baseCard";
 import Deck from "./deck";
 
+export interface IProjectJSON {
+  _attributes: any;
+  _description: string;
+  _deckIds: string[];
+  _id: string;
+  _name: string;
+  _text: any;
+}
+
 export class Project extends BaseCard {
   
   private _deckIds: string[] = [];
@@ -83,6 +92,31 @@ export class Project extends BaseCard {
   public addDeckId( deckId: string ) {
     this._deckIds.push( deckId );
     this.updateGlobal();
+  }
+
+  // JSON Helpers
+  // per: http://choly.ca/post/typescript-json/
+  public toJSON(): IProjectJSON {
+    return Object.assign({}, this, {
+      // explicitly assign protected fields
+      _attributes:  this._attributes,
+      _description: this._description,
+      _deckIds:     this._deckIds,
+      _id:          this._id,
+      _name:        this._name,
+      _text:        this._text,
+    });
+  }
+
+  public static fromJSON(projectJSON: IProjectJSON): Project {
+    // Assign JSON to new Project object
+    let projectAssigned: Project  = Object.assign(Object.create(Project.prototype), projectJSON);
+    Project.projects[projectAssigned.id] = projectAssigned;
+    return projectAssigned;
+  }
+
+  public static reviver(key: string, value: any): any {
+    return key === "" ? Project.fromJSON(value) : value;
   }
 
   // Global Projects

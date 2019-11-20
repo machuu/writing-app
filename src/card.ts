@@ -1,8 +1,7 @@
 import BaseCard from "./baseCard";
 
-
 export interface ICardJSON {
-  _attributes: ICardAttribute[];
+  _attributes: any;
   _description: string;
   _id: string;
   _name: string;
@@ -25,19 +24,20 @@ export class Card extends BaseCard {
   // per: http://choly.ca/post/typescript-json/
   public toJSON(): ICardJSON {
     return Object.assign({}, this, {
-      // explicitly assign private fields
-      _attributes: this._attributes,
+      // explicitly assign protected fields
+      _attributes:  this._attributes,
       _description: this._description,
-      _id: this._id,
-      _name: this._name,
-      _text: this._text,
+      _id:          this._id,
+      _name:        this._name,
+      _text:        this._text,
     });
   }
 
   public static fromJSON(cardJSON: ICardJSON): Card {
     // Assign JSON to new Card object
-    let card = Object.create(Card.prototype);
-    return Object.assign(card, cardJSON);
+    let cardAssigned: Card  = Object.assign(Object.create(Card.prototype), cardJSON);
+    Card.cards[cardAssigned.id] = cardAssigned;
+    return cardAssigned;
   }
 
   public static reviver(key: string, value: any): any {
