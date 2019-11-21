@@ -1,7 +1,7 @@
 /**
  * Text Editor
  */
-const EditorJS = require("@editorjs/editorjs");
+import EditorJS from "@editorjs/editorjs";
 
 let defaultTextEditorData: any = {
   blocks: [

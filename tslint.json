@@ -15,7 +15,6 @@
         }
       ],
       "no-console": true,
-      "no-var-requires": false,
       "variable-name": {
         "options": [
           "allow-leading-underscore"
