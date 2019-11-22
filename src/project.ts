@@ -1,5 +1,7 @@
 import BaseCard from "./baseCard";
 import Deck from "./deck";
+import NavMenu from "./navigation";
+import TextEditor from "./editor";
 
 export interface IProjectJSON {
   _attributes: any;
@@ -12,6 +14,10 @@ export interface IProjectJSON {
 
 export class Project extends BaseCard {
   
+  public sceneNavigator: NavMenu;
+  public referenceNavigator: NavMenu;
+  public mainEditor: TextEditor;
+
   private _deckIds: string[] = [];
 
   private static _projects: any = {};
@@ -92,6 +98,20 @@ export class Project extends BaseCard {
   public addDeckId( deckId: string ) {
     this._deckIds.push( deckId );
     this.updateGlobal();
+  }
+
+  public setupProjectWindow() {
+    this.sceneNavigator = new NavMenu("scene-navigator");
+    this.sceneNavigator.closed_width = "20px";
+    this.sceneNavigator.opened_width = "250px";
+
+    this.referenceNavigator = new NavMenu("card-navigator");
+    this.referenceNavigator.closed_width = "20px";
+    this.referenceNavigator.opened_width = "250px";
+
+    this.mainEditor = new TextEditor("editorjs");
+    this.mainEditor.addSaveButton("saveButton");
+    this.mainEditor.addLoadButton("loadButton");
   }
 
   // JSON Helpers

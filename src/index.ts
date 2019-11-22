@@ -21,21 +21,7 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-/**
- * Navigation
- */
-import NavMenu from "./navigation";
+import Project from "./project";
 
-let sceneNavigator = new NavMenu("scene-navigator");
-sceneNavigator.closed_width = "20px";
-sceneNavigator.opened_width = "250px";
-
-let cardNavigator = new NavMenu("card-navigator");
-cardNavigator.closed_width = "20px";
-cardNavigator.opened_width = "250px";
-
-import TextEditor from "./editor";
-
-let mainEditor = new TextEditor("editorjs");
-mainEditor.addSaveButton("saveButton");
-mainEditor.addLoadButton("loadButton");
+let project: Project = new Project();
+project.setupProjectWindow();
