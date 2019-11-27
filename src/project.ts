@@ -1,5 +1,6 @@
 import BaseCard from "./baseCard";
 import Deck from "./deck";
+import Card from "./card";
 import NavMenu from "./navigation";
 import TextEditor from "./editor";
 
@@ -112,6 +113,49 @@ export class Project extends BaseCard {
     this.mainEditor = new TextEditor("editorjs");
     this.mainEditor.addSaveButton("saveButton");
     this.mainEditor.addLoadButton("loadButton");
+  }
+
+  public populateNavigators() {
+    this.populateSceneNavigator();
+  }
+
+  private populateSceneNavigator() {
+    let sceneDeckDiv: HTMLElement;
+    let sceneCardHolderDiv: HTMLElement;
+    let sceneCardDiv: HTMLElement;
+
+    console.log("Populating Scene Navigator");
+    console.log(this.sceneDecks);
+    console.log(this.sceneDeckIds);
+
+    for ( let sceneDeckId of this.sceneDeckIds ) {
+      let sceneDeck: Deck = Deck.decks[sceneDeckId];
+
+      // Add div for Deck
+      console.log(`Adding Scene Deck: ${sceneDeck}`);
+      sceneDeckDiv = document.createElement("div");
+      sceneDeckDiv.classList.add("navigator-item");
+      sceneDeckDiv.id = `SceneNav-${sceneDeck.id}`;
+      sceneDeckDiv.innerHTML = sceneDeck.name;
+      this.sceneNavigator.element.appendChild(sceneDeckDiv);
+
+      sceneCardHolderDiv = document.createElement("div");
+      sceneCardHolderDiv.style.paddingLeft = "10px";
+      this.sceneNavigator.element.appendChild(sceneCardHolderDiv);
+
+      for ( let sceneCardId of sceneDeck.cardIds ) {
+        let sceneCard: Card = Card.cards[sceneCardId];
+
+        // Add div for Card
+        console.log(`Adding Scene Card: ${sceneCard.id}`);
+        sceneCardDiv = document.createElement("div");
+        sceneCardDiv.classList.add("navigator-item");
+        sceneCardDiv.id = `SceneNav-${sceneCard.id}`;
+        sceneCardDiv.innerHTML = sceneCard.name;
+
+        sceneCardHolderDiv.appendChild(sceneCardDiv);
+      }
+    }
   }
 
   // JSON Helpers
