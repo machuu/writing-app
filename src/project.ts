@@ -44,6 +44,10 @@ export class Project extends BaseCard {
     return decksObject.map( (deckId: string, deck: Deck): string => { return deckId; });
   }
   protected getFilteredDeckIds(filterString: string = ".*"): string[] {
+    if ( this.deckIds === undefined ) {
+      return [];
+    }
+
     let filterRegex = RegExp(filterString);
     return this._deckIds.filter( (element) => {
       return filterRegex.test(element);
