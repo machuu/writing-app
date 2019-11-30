@@ -148,9 +148,9 @@ export class Project extends BaseCard {
         console.log(`Unkown Navigator Type: ${navigatorType}`);
     }
 
-    console.log("Populating Scene Navigator");
-    console.log(this.sceneDecks);
-    console.log(this.sceneDeckIds);
+    if ( navigator === undefined ) {
+      return;
+    }
 
     for ( let deckId of deckIds ) {
       let deck: Deck = Deck.decks[deckId];
