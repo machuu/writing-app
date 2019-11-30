@@ -116,46 +116,81 @@ export class Project extends BaseCard {
   }
 
   public populateNavigators() {
-    this.populateSceneNavigator();
+    this.populateNavigator("Scene");
+    this.populateNavigator("Reference");
   }
 
-  private populateSceneNavigator() {
-    let sceneDeckDiv: HTMLElement;
-    let sceneCardHolderDiv: HTMLElement;
-    let sceneCardDiv: HTMLElement;
+  private populateNavigator(navigatorType: string) {
+    let deckDiv: HTMLElement;
+    let cardHolderDiv: HTMLElement;
+    let cardDiv: HTMLElement;
+
+    console.log(`Populating Navigator Type: ${navigatorType}`);
+    let navigator: NavMenu;
+    let deckIds: string[];
+
+    switch( navigatorType.toUpperCase() ) {
+      case "SCENE":
+        navigator = this.sceneNavigator;
+        deckIds   = this.sceneDeckIds;
+        break;
+      case "REFERENCE":
+        navigator = this.referenceNavigator;
+        deckIds   = this.referenceDeckIds;
+        break;
+      default:
+        deckIds = [];
+        console.log(`Unkown Navigator Type: ${navigatorType}`);
+    }
 
     console.log("Populating Scene Navigator");
     console.log(this.sceneDecks);
     console.log(this.sceneDeckIds);
 
-    for ( let sceneDeckId of this.sceneDeckIds ) {
-      let sceneDeck: Deck = Deck.decks[sceneDeckId];
+    for ( let deckId of deckIds ) {
+      let deck: Deck = Deck.decks[deckId];
 
       // Add div for Deck
-      console.log(`Adding Scene Deck: ${sceneDeck}`);
-      sceneDeckDiv = document.createElement("div");
-      sceneDeckDiv.classList.add("navigator-item");
-      sceneDeckDiv.id = `SceneNav-${sceneDeck.id}`;
-      sceneDeckDiv.innerHTML = sceneDeck.name;
-      this.sceneNavigator.element.appendChild(sceneDeckDiv);
+      console.log(`Adding Deck: ${deck}`);
+      deckDiv = document.createElement("div");
+      deckDiv.classList.add("navigator-item");
+      deckDiv.id = `Nav-${deck.id}`;
+      deckDiv.innerHTML = deck.name;
+      navigator.element.appendChild(deckDiv);
 
-      sceneCardHolderDiv = document.createElement("div");
-      sceneCardHolderDiv.style.paddingLeft = "10px";
-      this.sceneNavigator.element.appendChild(sceneCardHolderDiv);
+      cardHolderDiv = document.createElement("div");
+      cardHolderDiv.style.paddingLeft = "10px";
+      navigator.element.appendChild(cardHolderDiv);
 
-      for ( let sceneCardId of sceneDeck.cardIds ) {
-        let sceneCard: Card = Card.cards[sceneCardId];
+      for ( let cardId of deck.cardIds ) {
+        let card: Card = Card.cards[cardId];
 
         // Add div for Card
-        console.log(`Adding Scene Card: ${sceneCard.id}`);
-        sceneCardDiv = document.createElement("div");
-        sceneCardDiv.classList.add("navigator-item");
-        sceneCardDiv.id = `SceneNav-${sceneCard.id}`;
-        sceneCardDiv.innerHTML = sceneCard.name;
+        console.log(`Adding Card: ${card.id}`);
+        cardDiv = document.createElement("div");
+        cardDiv.classList.add("navigator-item");
+        cardDiv.id = `Nav-${card.id}`;
+        cardDiv.innerHTML = card.name;
 
-        sceneCardHolderDiv.appendChild(sceneCardDiv);
+        cardHolderDiv.appendChild(cardDiv);
       }
+
+      // Add button for New Card
+      console.log(`Adding New Card Button`);
+      cardDiv = document.createElement("div");
+      cardDiv.classList.add("navigator-item");
+      cardDiv.id = `Nav-NewCardButton`;
+      cardDiv.innerHTML = "+ New Card";
+      cardHolderDiv.appendChild(cardDiv);
     }
+
+    // Add button for New Deck
+    console.log(`Adding New Deck Button`);
+    deckDiv = document.createElement("div");
+    deckDiv.classList.add("navigator-item");
+    deckDiv.id = `Nav-NewDeckButton`;
+    deckDiv.innerHTML = "+ New Deck";
+    navigator.element.appendChild(deckDiv);
   }
 
   // JSON Helpers
