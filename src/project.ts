@@ -1,5 +1,6 @@
 import BaseCard from "./baseCard";
 import Deck from "./deck";
+import Card from "./card";
 import NavMenu from "./navigation";
 import TextEditor from "./editor";
 
@@ -13,7 +14,7 @@ export interface IProjectJSON {
 }
 
 export class Project extends BaseCard {
-  
+
   public sceneNavigator: NavMenu;
   public referenceNavigator: NavMenu;
   public mainEditor: TextEditor;
@@ -29,6 +30,7 @@ export class Project extends BaseCard {
 
   protected updateGlobal(): void {
     Project._projects[this.id] = this;
+    this.populateNavigators();
   }
 
   protected convertDeckIdsToDecks(deckIdList: string[]): any {
@@ -42,6 +44,10 @@ export class Project extends BaseCard {
     return decksObject.map( (deckId: string, deck: Deck): string => { return deckId; });
   }
   protected getFilteredDeckIds(filterString: string = ".*"): string[] {
+    if ( this.deckIds === undefined ) {
+      return [];
+    }
+
     let filterRegex = RegExp(filterString);
     return this._deckIds.filter( (element) => {
       return filterRegex.test(element);
@@ -112,6 +118,123 @@ export class Project extends BaseCard {
     this.mainEditor = new TextEditor("editorjs");
     this.mainEditor.addSaveButton("saveButton");
     this.mainEditor.addLoadButton("loadButton");
+  }
+
+  public populateNavigators() {
+    this.populateNavigator("Scene");
+    this.populateNavigator("Reference");
+  }
+
+  private populateNavigator(argNavigatorType: string) {
+    let deckHolderDiv: HTMLElement;
+    let deckHolderDivId: string;
+    let deckDiv: HTMLElement;
+    let cardHolderDiv: HTMLElement;
+    let cardDiv: HTMLElement;
+
+    let navigatorType: string = argNavigatorType.toUpperCase();
+    console.log(`Populating Navigator Type: ${navigatorType}`);
+    let navigator: NavMenu;
+    let deckIds: string[];
+
+    switch( navigatorType ) {
+      case "SCENE":
+        navigator = this.sceneNavigator;
+        deckIds   = this.sceneDeckIds;
+        break;
+      case "REFERENCE":
+        navigator = this.referenceNavigator;
+        deckIds   = this.referenceDeckIds;
+        break;
+      default:
+        deckIds = [];
+        console.log(`Unkown Navigator Type: ${navigatorType}`);
+    }
+
+    if ( navigator === undefined ) {
+      return;
+    }
+
+    // Remove old Deck/Card list, if it already exists
+    deckHolderDivId = `${navigatorType}-DeckHolder`;
+    this.deepRemoveElement(deckHolderDivId);
+
+    // Create new Deck Holder Div and add to Navigator
+    deckHolderDiv = document.createElement("div");
+    deckHolderDiv.id = deckHolderDivId;
+    navigator.element.appendChild(deckHolderDiv);
+
+    for ( let deckId of deckIds ) {
+      let deck: Deck = Deck.decks[deckId];
+
+      // Add div for Deck
+      console.log(`Adding Deck: ${deck.id}`);
+      deckDiv = document.createElement("div");
+      deckDiv.classList.add("navigator-item");
+      deckDiv.id = `Nav-${deck.id}`;
+      deckDiv.innerHTML = deck.name;
+      deckHolderDiv.appendChild(deckDiv);
+
+      cardHolderDiv = document.createElement("div");
+      cardHolderDiv.style.paddingLeft = "10px";
+      deckHolderDiv.appendChild(cardHolderDiv);
+
+      for ( let cardId of deck.cardIds ) {
+        let card: Card = Card.cards[cardId];
+
+        // Add div for Card
+        console.log(`Adding Card: ${card.id}`);
+        cardDiv = document.createElement("div");
+        cardDiv.classList.add("navigator-item");
+        cardDiv.id = `Nav-${card.id}`;
+        cardDiv.innerHTML = card.name;
+
+        cardHolderDiv.appendChild(cardDiv);
+      }
+
+      // Add button for New Card
+      console.log(`Adding New Card Button`);
+      cardDiv = document.createElement("div");
+      cardDiv.classList.add("navigator-item");
+      cardDiv.id = `Nav-NewCardButton`;
+      cardDiv.innerHTML = "+ New Card";
+      cardHolderDiv.appendChild(cardDiv);
+    }
+
+    // Add button for New Deck
+    console.log(`Adding New Deck Button`);
+    deckDiv = document.createElement("div");
+    deckDiv.classList.add("navigator-item");
+    deckDiv.id = `Nav-NewDeckButton`;
+    deckDiv.innerHTML = "+ New Deck";
+    deckHolderDiv.appendChild(deckDiv);
+  }
+
+  private deepRemoveElement(targetElementId: string ) {
+    let targetElement: HTMLElement;
+    if ( document.getElementById(targetElementId) ) {
+      targetElement = document.getElementById(targetElementId);
+      console.log(`Removing children of Element: ${targetElementId}`);
+      while ( targetElement.hasChildNodes() ) {
+        console.log(`Removing childNode: '${targetElement.firstChild.nodeName}'`);
+        console.log(targetElement.firstChild)
+        this.deepRemoveNode( targetElement.firstChild );
+      }
+      console.log(`Removing Element: ${targetElementId}`);
+      targetElement.remove();
+    }
+  }
+
+  private deepRemoveNode(targetNode: Node) {
+    console.log(`Removing children of Node: ${targetNode.nodeName}`);
+    while ( targetNode.hasChildNodes() ) {
+      console.log(`Removing child: '${targetNode.firstChild.nodeName}'`);
+      console.log(targetNode.firstChild)
+      this.deepRemoveNode( targetNode.firstChild );
+    }
+    console.log(`Removing Node: ${targetNode.nodeName}`);
+    targetNode.parentNode.removeChild(targetNode);
+
   }
 
   // JSON Helpers

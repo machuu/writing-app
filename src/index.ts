@@ -22,6 +22,26 @@ if ("serviceWorker" in navigator) {
 }
 
 import Project from "./project";
+import Deck from "./deck";
+import Card from "./card";
 
 let project: Project = new Project();
 project.setupProjectWindow();
+
+let sceneDeck1: Deck = Deck.decks[project.newSceneDeck()];
+let sceneDeck2: Deck = Deck.decks[project.newSceneDeck()];
+
+sceneDeck1.name = "Scene Deck 1"
+sceneDeck2.name = "Scene Deck 2"
+
+let sceneDeck1Card1: Card = Card.cards[sceneDeck1.newCard()];
+let sceneDeck1Card2: Card = Card.cards[sceneDeck1.newCard()];
+let sceneDeck2Card1: Card = Card.cards[sceneDeck2.newCard()];
+let sceneDeck2Card2: Card = Card.cards[sceneDeck2.newCard()];
+
+sceneDeck1Card1.name = "Card 1";
+sceneDeck1Card2.name = "Card 2";
+sceneDeck2Card1.name = "Card 1";
+sceneDeck2Card2.name = "Card 2";
+
+project.populateNavigators();
