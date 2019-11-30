@@ -126,6 +126,8 @@ export class Project extends BaseCard {
   }
 
   private populateNavigator(navigatorType: string) {
+    let deckHolderDiv: HTMLElement;
+    let deckHolderDivId: string;
     let deckDiv: HTMLElement;
     let cardHolderDiv: HTMLElement;
     let cardDiv: HTMLElement;
@@ -152,6 +154,15 @@ export class Project extends BaseCard {
       return;
     }
 
+    // Remove old Deck/Card list, if it already exists
+    deckHolderDivId = `${navigatorType}-DeckHolder`;
+    this.deepRemoveElement(deckHolderDivId);
+
+    // Create new Deck Holder Div and add to Navigator
+    deckHolderDiv = document.createElement("div");
+    deckHolderDiv.id = deckHolderDivId;
+    navigator.element.appendChild(deckHolderDiv);
+
     for ( let deckId of deckIds ) {
       let deck: Deck = Deck.decks[deckId];
 
@@ -161,11 +172,11 @@ export class Project extends BaseCard {
       deckDiv.classList.add("navigator-item");
       deckDiv.id = `Nav-${deck.id}`;
       deckDiv.innerHTML = deck.name;
-      navigator.element.appendChild(deckDiv);
+      deckHolderDiv.appendChild(deckDiv);
 
       cardHolderDiv = document.createElement("div");
       cardHolderDiv.style.paddingLeft = "10px";
-      navigator.element.appendChild(cardHolderDiv);
+      deckHolderDiv.appendChild(cardHolderDiv);
 
       for ( let cardId of deck.cardIds ) {
         let card: Card = Card.cards[cardId];
@@ -195,7 +206,34 @@ export class Project extends BaseCard {
     deckDiv.classList.add("navigator-item");
     deckDiv.id = `Nav-NewDeckButton`;
     deckDiv.innerHTML = "+ New Deck";
-    navigator.element.appendChild(deckDiv);
+    deckHolderDiv.appendChild(deckDiv);
+  }
+
+  private deepRemoveElement(targetElementId: string ) {
+    let targetElement: HTMLElement;
+    if ( document.getElementById(targetElementId) ) {
+      targetElement = document.getElementById(targetElementId);
+      console.log(`Removing children of Element: ${targetElementId}`);
+      while ( targetElement.hasChildNodes() ) {
+        console.log(`Removing childNode: '${targetElement.firstChild.nodeName}'`);
+        console.log(targetElement.firstChild)
+        this.deepRemoveNode( targetElement.firstChild );
+      }
+      console.log(`Removing Element: ${targetElementId}`);
+      targetElement.remove();
+    }
+  }
+
+  private deepRemoveNode(targetNode: Node) {
+    console.log(`Removing children of Node: ${targetNode.nodeName}`);
+    while ( targetNode.hasChildNodes() ) {
+      console.log(`Removing child: '${targetNode.firstChild.nodeName}'`);
+      console.log(targetNode.firstChild)
+      this.deepRemoveNode( targetNode.firstChild );
+    }
+    console.log(`Removing Node: ${targetNode.nodeName}`);
+    targetNode.parentNode.removeChild(targetNode);
+
   }
 
   // JSON Helpers
