@@ -14,7 +14,7 @@ export interface IProjectJSON {
 }
 
 export class Project extends BaseCard {
-  
+
   public sceneNavigator: NavMenu;
   public referenceNavigator: NavMenu;
   public mainEditor: TextEditor;
