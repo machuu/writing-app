@@ -168,7 +168,7 @@ export class Project extends BaseCard {
       let deck: Deck = Deck.decks[deckId];
 
       // Add div for Deck
-      console.log(`Adding Deck: ${deck}`);
+      console.log(`Adding Deck: ${deck.id}`);
       deckDiv = document.createElement("div");
       deckDiv.classList.add("navigator-item");
       deckDiv.id = `Nav-${deck.id}`;
