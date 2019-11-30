@@ -30,6 +30,7 @@ export class Project extends BaseCard {
 
   protected updateGlobal(): void {
     Project._projects[this.id] = this;
+    this.populateNavigators();
   }
 
   protected convertDeckIdsToDecks(deckIdList: string[]): any {
