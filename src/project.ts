@@ -125,18 +125,19 @@ export class Project extends BaseCard {
     this.populateNavigator("Reference");
   }
 
-  private populateNavigator(navigatorType: string) {
+  private populateNavigator(argNavigatorType: string) {
     let deckHolderDiv: HTMLElement;
     let deckHolderDivId: string;
     let deckDiv: HTMLElement;
     let cardHolderDiv: HTMLElement;
     let cardDiv: HTMLElement;
 
+    let navigatorType: string = argNavigatorType.toUpperCase();
     console.log(`Populating Navigator Type: ${navigatorType}`);
     let navigator: NavMenu;
     let deckIds: string[];
 
-    switch( navigatorType.toUpperCase() ) {
+    switch( navigatorType ) {
       case "SCENE":
         navigator = this.sceneNavigator;
         deckIds   = this.sceneDeckIds;
