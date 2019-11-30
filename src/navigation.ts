@@ -17,6 +17,7 @@ class NavMenu {
   private _is_open: boolean = false;
 
   constructor(id: string) {
+    console.log(`Constructing new NavMenu on element id: ${id}`);
     this._element = document.getElementById(id);
 
     // Try initializing NavMenu buttons, if the elements exist
@@ -48,6 +49,7 @@ class NavMenu {
   public set_close_button(button_id: string): void {
     // Assign this Nav's close button, if it exists
     if ( document.getElementById(button_id) ) {
+      console.log(`Adding close button '${button_id}' to NavMenu '${this.id}'`);
       this._close_button = <HTMLElement> document.getElementById(button_id);
 
       // Add new event listener
@@ -58,6 +60,7 @@ class NavMenu {
   public set_open_button(button_id: string) {
     // Assign this Nav's open button, if it exists
     if ( document.getElementById(button_id) ) {
+      console.log(`Adding open button '${button_id}' to NavMenu '${this.id}'`);
       this._open_button = document.getElementById(button_id);
 
       // Add new event listener
@@ -68,6 +71,7 @@ class NavMenu {
   public set_toggle_button(button_id: string) {
     // Assign this Nav's toggle button, if it exists
     if ( document.getElementById(button_id) ) {
+      console.log(`Adding toggle button '${button_id}' to NavMenu '${this.id}'`);
       this._toggle_button = document.getElementById(button_id);
 
       // Add new event listener
