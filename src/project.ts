@@ -199,6 +199,7 @@ export class Project extends BaseCard {
       cardDiv.id = `Nav-NewCardButton`;
       cardDiv.innerHTML = "+ New Card";
       cardHolderDiv.appendChild(cardDiv);
+      cardDiv.addEventListener("click", () => { Deck.decks[deckId].newCard(); } );
     }
 
     // Add button for New Deck
@@ -208,6 +209,7 @@ export class Project extends BaseCard {
     deckDiv.id = `Nav-NewDeckButton`;
     deckDiv.innerHTML = "+ New Deck";
     deckHolderDiv.appendChild(deckDiv);
+    deckDiv.addEventListener("click", () => { this.newDeck(navigatorType); } );
   }
 
   private deepRemoveElement(targetElementId: string ) {
