@@ -106,6 +106,20 @@ export class Project extends BaseCard {
     this.updateGlobal();
   }
 
+  public handleEvent(event: any) {
+
+    switch( event.type ) {
+      case "click":
+        console.log(event);
+        console.log(`Got a click on ${event.target.id}`);
+        break;
+      default:
+        return;
+    }
+
+    console.log("Handling Click on NavMenu");
+  }
+
   public setupProjectWindow() {
     this.sceneNavigator = new NavMenu("scene-navigator");
     this.sceneNavigator.closed_width = "20px";
@@ -199,7 +213,7 @@ export class Project extends BaseCard {
       cardDiv.id = `Nav-NewCardButton`;
       cardDiv.innerHTML = "+ New Card";
       cardHolderDiv.appendChild(cardDiv);
-      cardDiv.addEventListener("click", () => { Deck.decks[deckId].newCard(); } );
+      cardDiv.addEventListener("click", this, false );
     }
 
     // Add button for New Deck
@@ -209,7 +223,7 @@ export class Project extends BaseCard {
     deckDiv.id = `Nav-NewDeckButton`;
     deckDiv.innerHTML = "+ New Deck";
     deckHolderDiv.appendChild(deckDiv);
-    deckDiv.addEventListener("click", () => { this.newDeck(navigatorType); } );
+    deckDiv.addEventListener("click", this, false);
   }
 
   private deepRemoveElement(targetElementId: string ) {
