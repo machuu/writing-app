@@ -48,7 +48,7 @@ export class Project extends BaseCard {
       return [];
     }
 
-    let filterRegex = RegExp(filterString);
+    let filterRegex = RegExp(filterString, "i");
     return this._deckIds.filter( (element) => {
       return filterRegex.test(element);
     });
