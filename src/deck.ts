@@ -18,7 +18,7 @@ export class Deck extends BaseCard {
   private static _decks: any = {};
 
   constructor(deckType: string) {
-    super(deckType + "-Deck");
+    super(deckType.toUpperCase() + "-DECK");
     this._deckType = deckType;
     this.updateGlobal();
   }
