@@ -118,6 +118,26 @@ export class Project extends BaseCard {
     }
 
     console.log("Handling Click on NavMenu");
+    let buttonIdArgs: string[] = event.target.id.split("_");
+    console.log(buttonIdArgs);
+    switch (buttonIdArgs[0]) {
+      case "NewCard":
+        // Add a new Card to deckId in element name
+        let deckId: string = buttonIdArgs[1];
+        let newCardId: string = Deck.decks[deckId].newCard();
+        Card.cards[newCardId].name = "NewCard";
+        this.updateGlobal();
+        break;
+      case "NewDeck":
+        let deckType: string = buttonIdArgs[1];
+        let newDeckId: string = this.newDeck(deckType);
+        Deck.decks[newDeckId].name = "NewDeck";
+        this.updateGlobal();
+        break;
+      default:
+        console.log(`unknown click action on id: ${event.target.id}`);
+        return;
+    }
   }
 
   public setupProjectWindow() {
