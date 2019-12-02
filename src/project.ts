@@ -87,6 +87,7 @@ export class Project extends BaseCard {
   // New Decks
   public newDeck(deckType: string): string {
     let newDeck: Deck = new Deck(deckType);
+    console.log(`Add new Deck to Project: ${newDeck.id}`);
     this._deckIds.push(newDeck.id);
     this.updateGlobal();
     return newDeck.id;
