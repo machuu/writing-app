@@ -48,7 +48,7 @@ export class Project extends BaseCard {
       return [];
     }
 
-    let filterRegex = RegExp(filterString);
+    let filterRegex = RegExp(filterString, "i");
     return this._deckIds.filter( (element) => {
       return filterRegex.test(element);
     });
@@ -63,10 +63,10 @@ export class Project extends BaseCard {
     return this._deckIds;
   }
   public get sceneDeckIds(): string[] {
-    return this.getFilteredDeckIds("^Scene");
+    return this.getFilteredDeckIds("^SCENE");
   }
   public get referenceDeckIds(): string[] {
-    return this.getFilteredDeckIds("^Reference");
+    return this.getFilteredDeckIds("^REFERENCE");
   }
 
   // Deck setter/getters
@@ -87,6 +87,7 @@ export class Project extends BaseCard {
   // New Decks
   public newDeck(deckType: string): string {
     let newDeck: Deck = new Deck(deckType);
+    console.log(`Add new Deck to Project: ${newDeck.id}`);
     this._deckIds.push(newDeck.id);
     this.updateGlobal();
     return newDeck.id;
@@ -104,6 +105,40 @@ export class Project extends BaseCard {
   public addDeckId( deckId: string ) {
     this._deckIds.push( deckId );
     this.updateGlobal();
+  }
+
+  public handleEvent(event: any) {
+
+    switch( event.type ) {
+      case "click":
+        console.log(event);
+        console.log(`Got a click on ${event.target.id}`);
+        break;
+      default:
+        return;
+    }
+
+    console.log("Handling Click on NavMenu");
+    let buttonIdArgs: string[] = event.target.id.split("_");
+    console.log(buttonIdArgs);
+    switch (buttonIdArgs[0]) {
+      case "NewCard":
+        // Add a new Card to deckId in element name
+        let deckId: string = buttonIdArgs[1];
+        let newCardId: string = Deck.decks[deckId].newCard();
+        Card.cards[newCardId].name = "NewCard";
+        this.updateGlobal();
+        break;
+      case "NewDeck":
+        let deckType: string = buttonIdArgs[1];
+        let newDeckId: string = this.newDeck(deckType);
+        Deck.decks[newDeckId].name = "NewDeck";
+        this.updateGlobal();
+        break;
+      default:
+        console.log(`unknown click action on id: ${event.target.id}`);
+        return;
+    }
   }
 
   public setupProjectWindow() {
@@ -171,7 +206,7 @@ export class Project extends BaseCard {
       console.log(`Adding Deck: ${deck.id}`);
       deckDiv = document.createElement("div");
       deckDiv.classList.add("navigator-item");
-      deckDiv.id = `Nav-${deck.id}`;
+      deckDiv.id = `Nav_${deck.id}`;
       deckDiv.innerHTML = deck.name;
       deckHolderDiv.appendChild(deckDiv);
 
@@ -186,7 +221,7 @@ export class Project extends BaseCard {
         console.log(`Adding Card: ${card.id}`);
         cardDiv = document.createElement("div");
         cardDiv.classList.add("navigator-item");
-        cardDiv.id = `Nav-${card.id}`;
+        cardDiv.id = `LoadCard_${navigatorType}_${card.id}`;
         cardDiv.innerHTML = card.name;
 
         cardHolderDiv.appendChild(cardDiv);
@@ -196,18 +231,20 @@ export class Project extends BaseCard {
       console.log(`Adding New Card Button`);
       cardDiv = document.createElement("div");
       cardDiv.classList.add("navigator-item");
-      cardDiv.id = `Nav-NewCardButton`;
+      cardDiv.id = `NewCard_${deckId}`;
       cardDiv.innerHTML = "+ New Card";
       cardHolderDiv.appendChild(cardDiv);
+      cardDiv.addEventListener("click", this, false );
     }
 
     // Add button for New Deck
     console.log(`Adding New Deck Button`);
     deckDiv = document.createElement("div");
     deckDiv.classList.add("navigator-item");
-    deckDiv.id = `Nav-NewDeckButton`;
+    deckDiv.id = `NewDeck_${navigatorType}`;
     deckDiv.innerHTML = "+ New Deck";
     deckHolderDiv.appendChild(deckDiv);
+    deckDiv.addEventListener("click", this, false);
   }
 
   private deepRemoveElement(targetElementId: string ) {

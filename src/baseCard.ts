@@ -14,7 +14,7 @@ export abstract class BaseCard {
     this._id = idPrefix
       + "-"
       + new Date().toISOString()
-      + "_"
+      + "-"
       + Math.random().toString(36).substring(2,6);
     this.updateGlobal();
   }
