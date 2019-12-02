@@ -146,7 +146,7 @@ export class Project extends BaseCard {
     this.sceneNavigator.closed_width = "20px";
     this.sceneNavigator.opened_width = "250px";
 
-    this.referenceNavigator = new NavMenu("card-navigator");
+    this.referenceNavigator = new NavMenu("reference-navigator");
     this.referenceNavigator.closed_width = "20px";
     this.referenceNavigator.opened_width = "250px";
 
