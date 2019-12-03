@@ -4,8 +4,8 @@
   "description": "Minimal web interface for writing stories.",
   "main": "express.js",
   "scripts": {
-    "build": "browserify -p tslintify -p tsify src/index.ts -o public/app.bundle.js",
-    "build-debug": "npm run browserify --debug",
+    "build": "browserify -p tsify src/index.ts -o public/app.bundle.js",
+    "build-debug": "npm run build --debug",
     "watchify": "watchify -v -p tsify src/index.ts -o public/app.bundle.js",
     "watchify-debug": "npm run watchify --debug",
     "start": "node express.js",
