@@ -21,9 +21,13 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-import Project from "./project";
-import Deck from "./deck";
 import Card from "./card";
+import Deck from "./deck";
+import loglevel from "loglevel";
+import Project from "./project";
+
+const log = loglevel.getLogger("Global");
+log.setDefaultLevel("debug");
 
 let project: Project = new Project();
 project.setupProjectWindow();
@@ -44,5 +48,5 @@ sceneDeck1Card2.name = "Card 2";
 sceneDeck2Card1.name = "Card 1";
 sceneDeck2Card2.name = "Card 2";
 
-console.log(project);
+log.trace(project);
 project.populateNavigators();

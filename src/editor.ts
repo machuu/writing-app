@@ -2,6 +2,11 @@
  * Text Editor
  */
 import EditorJS from "@editorjs/editorjs";
+import loglevel from "loglevel";
+
+const logGlobal = loglevel.getLogger("Global");
+const log = loglevel.getLogger("TextEditor");
+log.setDefaultLevel(logGlobal.getLevel());
 
 let defaultTextEditorData: any = {
   blocks: [
@@ -35,7 +40,7 @@ class TextEditor {
     if ( document.getElementById(this.elementId) ) {
       this.element = document.getElementById(this.elementId);
     } else {
-      console.log(`Unable to Initialize Text Editor in Element with id '${this.elementId}'`);
+      log.error(`Unable to Initialize Text Editor in Element with id '${this.elementId}'`);
       return;
     }
 
@@ -59,9 +64,9 @@ class TextEditor {
   public set element(givenElement: HTMLElement) {
     if ( this._element == null ) {
       this._element = givenElement;
-      console.log(`Setting Text Editor Element to element with id '${givenElement.id}'`);
+      log.debug(`Setting Text Editor Element to element with id '${givenElement.id}'`);
     } else {
-      console.log(`Can not change Text Editor element '${this.element.id}' -> '${givenElement.id}'`);
+      log.error(`Can not change Text Editor element '${this.element.id}' -> '${givenElement.id}'`);
     }
   }
 
@@ -88,9 +93,9 @@ class TextEditor {
     if ( dataId === "" ) {
       dataId = this.promptForDataId();
     }
-    console.log(`Retreiving EditorJS from localStorage: ${dataId}`);
+    log.debug(`Retreiving EditorJS from localStorage: ${dataId}`);
     let retreivedData = JSON.parse( localStorage.getItem(dataId) );
-    console.log("retreived_data: ", retreivedData );
+    log.trace("retreived_data: ", retreivedData );
     this.editor.render(retreivedData);
   }
 
@@ -101,8 +106,8 @@ class TextEditor {
     }
 
     this.editor.save().then((savedData: any) => {
-        console.log(`Saving Editor Data: ${dataId}`);
-        console.log(savedData);
+        log.debug(`Saving Editor Data: ${dataId}`);
+        log.trace(savedData);
         localStorage.setItem(dataId, JSON.stringify(savedData));
       });
   }

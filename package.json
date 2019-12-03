@@ -20,6 +20,7 @@
     "@types/core-js": "^2.5.2",
     "cookie-parser": "~1.4.4",
     "express": "~4.16.1",
+    "loglevel": "^1.6.6",
     "morgan": "~1.9.1",
     "pouchdb": "^7.1.1"
   },

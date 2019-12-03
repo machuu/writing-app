@@ -1,5 +1,10 @@
 import BaseCard from "./baseCard";
 import Card from "./card";
+import loglevel from "loglevel";
+
+const logGlobal = loglevel.getLogger("Global");
+const log = loglevel.getLogger("Deck");
+log.setDefaultLevel(logGlobal.getLevel());
 
 export interface IDeckJSON {
   _attributes: any;
