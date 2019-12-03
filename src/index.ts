@@ -23,10 +23,11 @@ if ("serviceWorker" in navigator) {
 
 import Card from "./card";
 import Deck from "./deck";
-import log from "loglevel";
+import loglevel from "loglevel";
 import Project from "./project";
 
-log.setLevel("debug");
+const log = loglevel.getLogger("Global");
+log.setDefaultLevel("debug");
 
 let project: Project = new Project();
 project.setupProjectWindow();

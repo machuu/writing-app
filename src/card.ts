@@ -1,5 +1,9 @@
 import BaseCard from "./baseCard";
-import log from "loglevel";
+import loglevel from "loglevel";
+
+const logGlobal = loglevel.getLogger("Global");
+const log = loglevel.getLogger("Card");
+log.setDefaultLevel(logGlobal.getLevel());
 
 export interface ICardJSON {
   _attributes: any;

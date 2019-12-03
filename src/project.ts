@@ -1,11 +1,13 @@
 import BaseCard from "./baseCard";
 import Deck from "./deck";
 import Card from "./card";
-import log from "loglevel";
+import loglevel from "loglevel";
 import NavMenu from "./navigation";
 import TextEditor from "./editor";
 
-log.setLevel("debug");
+const logGlobal = loglevel.getLogger("Global");
+const log = loglevel.getLogger("Project");
+log.setDefaultLevel(logGlobal.getLevel());
 
 export interface IProjectJSON {
   _attributes: any;

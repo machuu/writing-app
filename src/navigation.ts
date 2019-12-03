@@ -1,7 +1,11 @@
 // Navigation Helpers
 //
 //
-import log from "loglevel";
+import loglevel from "loglevel";
+
+const logGlobal = loglevel.getLogger("Global");
+const log = loglevel.getLogger("NavMenu");
+log.setDefaultLevel(logGlobal.getLevel());
 
 class NavMenu {
 

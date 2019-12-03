@@ -1,4 +1,8 @@
-import log from "loglevel";
+import loglevel from "loglevel";
+
+const logGlobal = loglevel.getLogger("Global");
+const log = loglevel.getLogger("BaseCard");
+log.setDefaultLevel(logGlobal.getLevel());
 
 export abstract class BaseCard {
   protected _attributes: any = {}; // array of Card Attributes

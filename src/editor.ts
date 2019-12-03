@@ -2,7 +2,11 @@
  * Text Editor
  */
 import EditorJS from "@editorjs/editorjs";
-import log from "loglevel";
+import loglevel from "loglevel";
+
+const logGlobal = loglevel.getLogger("Global");
+const log = loglevel.getLogger("TextEditor");
+log.setDefaultLevel(logGlobal.getLevel());
 
 let defaultTextEditorData: any = {
   blocks: [
