@@ -211,13 +211,14 @@ export class Project extends BaseCard {
       console.log(`Adding Deck: ${deck.id}`);
       deckDiv = document.createElement("div");
       deckDiv.classList.add("navigator-item");
-      deckDiv.id = `Nav_${deck.id}`;
+      deckDiv.id = `${navigatorType}_{deck.id}`;
       deckDiv.innerHTML = deck.name;
       deckDiv.setAttribute("deckId", deckId);
       deckHolderDiv.appendChild(deckDiv);
 
       cardHolderDiv = document.createElement("div");
       cardHolderDiv.style.paddingLeft = "10px";
+      cardHolderDiv.id = `CardHolder-${deckDiv.id}`;
       deckHolderDiv.appendChild(cardHolderDiv);
 
       for ( let cardId of deck.cardIds ) {
