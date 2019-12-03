@@ -113,30 +113,35 @@ export class Project extends BaseCard {
       case "click":
         console.log(event);
         console.log(`Got a click on ${event.target.id}`);
+        this.handleClickEvent(event);
         break;
       default:
         return;
     }
+  }
 
-    console.log("Handling Click on NavMenu");
-    let buttonIdArgs: string[] = event.target.id.split("_");
-    console.log(buttonIdArgs);
-    switch (buttonIdArgs[0]) {
-      case "NewCard":
+  private handleClickEvent(event: any) {
+
+    console.log("Handling Click");
+    let target: HTMLElement = event.target;
+    let clickAction: string = target.getAttribute("clickAction");
+
+    switch ( clickAction.toUpperCase() ) {
+      case "NEWCARD":
         // Add a new Card to deckId in element name
-        let deckId: string = buttonIdArgs[1];
+        let deckId: string = event.target.getAttribute("deckId");
         let newCardId: string = Deck.decks[deckId].newCard();
         Card.cards[newCardId].name = "NewCard";
         this.updateGlobal();
         break;
-      case "NewDeck":
-        let deckType: string = buttonIdArgs[1];
+      case "NEWDECK":
+        let deckType: string = event.target.getAttribute("deckType");
         let newDeckId: string = this.newDeck(deckType);
         Deck.decks[newDeckId].name = "NewDeck";
         this.updateGlobal();
         break;
       default:
-        console.log(`unknown click action on id: ${event.target.id}`);
+        console.log(`unknown click action '${clickAction}' on id: ${target.id}`);
         return;
     }
   }
@@ -206,12 +211,14 @@ export class Project extends BaseCard {
       console.log(`Adding Deck: ${deck.id}`);
       deckDiv = document.createElement("div");
       deckDiv.classList.add("navigator-item");
-      deckDiv.id = `Nav_${deck.id}`;
+      deckDiv.id = `${navigatorType}_{deck.id}`;
       deckDiv.innerHTML = deck.name;
+      deckDiv.setAttribute("deckId", deckId);
       deckHolderDiv.appendChild(deckDiv);
 
       cardHolderDiv = document.createElement("div");
       cardHolderDiv.style.paddingLeft = "10px";
+      cardHolderDiv.id = `CardHolder-${deckDiv.id}`;
       deckHolderDiv.appendChild(cardHolderDiv);
 
       for ( let cardId of deck.cardIds ) {
@@ -223,6 +230,9 @@ export class Project extends BaseCard {
         cardDiv.classList.add("navigator-item");
         cardDiv.id = `LoadCard_${navigatorType}_${card.id}`;
         cardDiv.innerHTML = card.name;
+        cardDiv.setAttribute("cardId", cardId);
+        cardDiv.setAttribute("clickAction", "loadCard");
+        cardDiv.setAttribute("navigatorType", navigatorType);
 
         cardHolderDiv.appendChild(cardDiv);
       }
@@ -233,6 +243,8 @@ export class Project extends BaseCard {
       cardDiv.classList.add("navigator-item");
       cardDiv.id = `NewCard_${deckId}`;
       cardDiv.innerHTML = "+ New Card";
+      cardDiv.setAttribute("deckId", deckId);
+      cardDiv.setAttribute("clickAction", "NewCard");
       cardHolderDiv.appendChild(cardDiv);
       cardDiv.addEventListener("click", this, false );
     }
@@ -243,6 +255,8 @@ export class Project extends BaseCard {
     deckDiv.classList.add("navigator-item");
     deckDiv.id = `NewDeck_${navigatorType}`;
     deckDiv.innerHTML = "+ New Deck";
+    deckDiv.setAttribute("deckType", navigatorType);
+    deckDiv.setAttribute("clickAction", "NewDeck");
     deckHolderDiv.appendChild(deckDiv);
     deckDiv.addEventListener("click", this, false);
   }
