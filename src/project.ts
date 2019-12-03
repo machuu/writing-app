@@ -113,10 +113,14 @@ export class Project extends BaseCard {
       case "click":
         console.log(event);
         console.log(`Got a click on ${event.target.id}`);
+        this.handleClickEvent(event);
         break;
       default:
         return;
     }
+  }
+
+  private handleClickEvent(event: any) {
 
     console.log("Handling Click");
     let target: HTMLElement = event.target;
