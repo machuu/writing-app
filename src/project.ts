@@ -137,12 +137,14 @@ export class Project extends BaseCard {
         let deckId: string = event.target.getAttribute("deckId");
         let newCardId: string = Deck.decks[deckId].newCard();
         Card.cards[newCardId].name = "NewCard";
+        log.debug(`Added Card '${newCardId}' to Deck '${deckId}'`);
         this.updateGlobal();
         break;
       case "NEWDECK":
         let deckType: string = event.target.getAttribute("deckType");
         let newDeckId: string = this.newDeck(deckType);
         Deck.decks[newDeckId].name = "NewDeck";
+        log.debug(`Added Deck '${newDeckId}'`);
         this.updateGlobal();
         break;
       default:
@@ -178,7 +180,7 @@ export class Project extends BaseCard {
     let cardDiv: HTMLElement;
 
     let navigatorType: string = argNavigatorType.toUpperCase();
-    log.info(`Populating Navigator Type: ${navigatorType}`);
+    log.trace(`Populating Navigator Type: ${navigatorType}`);
     let navigator: NavMenu;
     let deckIds: string[];
 
