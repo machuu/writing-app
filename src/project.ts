@@ -90,7 +90,7 @@ export class Project extends BaseCard {
   // New Decks
   public newDeck(deckType: string): string {
     let newDeck: Deck = new Deck(deckType);
-    console.log(`Add new Deck to Project: ${newDeck.id}`);
+    log.info(`Add new Deck to Project: ${newDeck.id}`);
     this._deckIds.push(newDeck.id);
     this.updateGlobal();
     return newDeck.id;
@@ -114,8 +114,8 @@ export class Project extends BaseCard {
 
     switch( event.type ) {
       case "click":
-        console.log(event);
-        console.log(`Got a click on ${event.target.id}`);
+        log.trace(event);
+        log.trace(`Got a click on ${event.target.id}`);
         this.handleClickEvent(event);
         break;
       default:
@@ -125,7 +125,7 @@ export class Project extends BaseCard {
 
   private handleClickEvent(event: any) {
 
-    console.log("Handling Click");
+    log.trace("Handling Click");
     let target: HTMLElement = event.target;
     let clickAction: string = target.getAttribute("clickAction");
 
@@ -144,7 +144,7 @@ export class Project extends BaseCard {
         this.updateGlobal();
         break;
       default:
-        console.log(`unknown click action '${clickAction}' on id: ${target.id}`);
+        log.warn(`unknown click action '${clickAction}' on id: ${target.id}`);
         return;
     }
   }
@@ -176,7 +176,7 @@ export class Project extends BaseCard {
     let cardDiv: HTMLElement;
 
     let navigatorType: string = argNavigatorType.toUpperCase();
-    console.log(`Populating Navigator Type: ${navigatorType}`);
+    log.info(`Populating Navigator Type: ${navigatorType}`);
     let navigator: NavMenu;
     let deckIds: string[];
 
@@ -191,7 +191,7 @@ export class Project extends BaseCard {
         break;
       default:
         deckIds = [];
-        console.log(`Unkown Navigator Type: ${navigatorType}`);
+        log.warn(`Unkown Navigator Type: ${navigatorType}`);
     }
 
     if ( navigator === undefined ) {
@@ -211,7 +211,7 @@ export class Project extends BaseCard {
       let deck: Deck = Deck.decks[deckId];
 
       // Add div for Deck
-      console.log(`Adding Deck: ${deck.id}`);
+      log.trace(`Adding Deck: ${deck.id}`);
       deckDiv = document.createElement("div");
       deckDiv.classList.add("navigator-item");
       deckDiv.id = `${navigatorType}_{deck.id}`;
@@ -228,7 +228,7 @@ export class Project extends BaseCard {
         let card: Card = Card.cards[cardId];
 
         // Add div for Card
-        console.log(`Adding Card: ${card.id}`);
+        log.trace(`Adding Card: ${card.id}`);
         cardDiv = document.createElement("div");
         cardDiv.classList.add("navigator-item");
         cardDiv.id = `LoadCard_${navigatorType}_${card.id}`;
@@ -241,7 +241,7 @@ export class Project extends BaseCard {
       }
 
       // Add button for New Card
-      console.log(`Adding New Card Button`);
+      log.trace(`Adding New Card Button`);
       cardDiv = document.createElement("div");
       cardDiv.classList.add("navigator-item");
       cardDiv.id = `NewCard_${deckId}`;
@@ -253,7 +253,7 @@ export class Project extends BaseCard {
     }
 
     // Add button for New Deck
-    console.log(`Adding New Deck Button`);
+    log.trace(`Adding New Deck Button`);
     deckDiv = document.createElement("div");
     deckDiv.classList.add("navigator-item");
     deckDiv.id = `NewDeck_${navigatorType}`;
@@ -268,25 +268,25 @@ export class Project extends BaseCard {
     let targetElement: HTMLElement;
     if ( document.getElementById(targetElementId) ) {
       targetElement = document.getElementById(targetElementId);
-      console.log(`Removing children of Element: ${targetElementId}`);
+      log.trace(`Removing children of Element: ${targetElementId}`);
       while ( targetElement.hasChildNodes() ) {
-        console.log(`Removing childNode: '${targetElement.firstChild.nodeName}'`);
-        console.log(targetElement.firstChild)
+        log.trace(`Removing childNode: '${targetElement.firstChild.nodeName}'`);
+        log.trace(targetElement.firstChild)
         this.deepRemoveNode( targetElement.firstChild );
       }
-      console.log(`Removing Element: ${targetElementId}`);
+      log.trace(`Removing Element: ${targetElementId}`);
       targetElement.remove();
     }
   }
 
   private deepRemoveNode(targetNode: Node) {
-    console.log(`Removing children of Node: ${targetNode.nodeName}`);
+    log.trace(`Removing children of Node: ${targetNode.nodeName}`);
     while ( targetNode.hasChildNodes() ) {
-      console.log(`Removing child: '${targetNode.firstChild.nodeName}'`);
-      console.log(targetNode.firstChild)
+      log.trace(`Removing child: '${targetNode.firstChild.nodeName}'`);
+      log.trace(targetNode.firstChild)
       this.deepRemoveNode( targetNode.firstChild );
     }
-    console.log(`Removing Node: ${targetNode.nodeName}`);
+    log.trace(`Removing Node: ${targetNode.nodeName}`);
     targetNode.parentNode.removeChild(targetNode);
 
   }

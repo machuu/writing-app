@@ -47,5 +47,5 @@ sceneDeck1Card2.name = "Card 2";
 sceneDeck2Card1.name = "Card 1";
 sceneDeck2Card2.name = "Card 2";
 
-console.log(project);
+log.trace(project);
 project.populateNavigators();

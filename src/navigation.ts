@@ -18,7 +18,7 @@ class NavMenu {
   private _is_open: boolean = false;
 
   constructor(id: string) {
-    console.log(`Constructing new NavMenu on element id: ${id}`);
+    log.info(`Constructing new NavMenu on element id: ${id}`);
     this._element = document.getElementById(id);
 
     // Try initializing NavMenu buttons, if the elements exist
@@ -50,7 +50,7 @@ class NavMenu {
   public set_close_button(button_id: string): void {
     // Assign this Nav's close button, if it exists
     if ( document.getElementById(button_id) ) {
-      console.log(`Adding close button '${button_id}' to NavMenu '${this.id}'`);
+      log.info(`Adding close button '${button_id}' to NavMenu '${this.id}'`);
       this._close_button = <HTMLElement> document.getElementById(button_id);
 
       // Add new event listener
@@ -61,7 +61,7 @@ class NavMenu {
   public set_open_button(button_id: string) {
     // Assign this Nav's open button, if it exists
     if ( document.getElementById(button_id) ) {
-      console.log(`Adding open button '${button_id}' to NavMenu '${this.id}'`);
+      log.info(`Adding open button '${button_id}' to NavMenu '${this.id}'`);
       this._open_button = document.getElementById(button_id);
 
       // Add new event listener
@@ -72,7 +72,7 @@ class NavMenu {
   public set_toggle_button(button_id: string) {
     // Assign this Nav's toggle button, if it exists
     if ( document.getElementById(button_id) ) {
-      console.log(`Adding toggle button '${button_id}' to NavMenu '${this.id}'`);
+      log.info(`Adding toggle button '${button_id}' to NavMenu '${this.id}'`);
       this._toggle_button = document.getElementById(button_id);
 
       // Add new event listener
@@ -133,21 +133,21 @@ class NavMenu {
   }
 
   public close() {
-    console.log(`Closing ${this.element.id}`);
+    log.info(`Closing ${this.element.id}`);
     this.set_width(  this.closed_width  );
     this.set_height( this.closed_height );
     this._is_open = false;
   }
 
   public open() {
-    console.log(`Opening ${this.element.id}`);
+    log.info(`Opening ${this.element.id}`);
     this.set_width(  this.opened_width  );
     this.set_height( this.opened_height );
     this._is_open = true;
   }
 
   public toggle() {
-    console.log(`Toggling ${this.element.id}`);
+    log.info(`Toggling ${this.element.id}`);
     if ( this.is_open() ) {
       this.close();
     } else {
@@ -156,12 +156,12 @@ class NavMenu {
   }
 
   private set_height(css_size: string) {
-    console.log(`Set ${this.element.id} height to ${css_size}`);
+    log.debug(`Set ${this.element.id} height to ${css_size}`);
     this.element.style.height = css_size;
   }
 
   private set_width(css_size: string) {
-    console.log(`Set ${this.element.id} width to ${css_size}`);
+    log.debug(`Set ${this.element.id} width to ${css_size}`);
     this.element.style.width = css_size;
   }
 

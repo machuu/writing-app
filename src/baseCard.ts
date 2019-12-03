@@ -24,7 +24,7 @@ export abstract class BaseCard {
   // Accessors
   public get id(): string      { return this._id; }
   public set id(newId: string) {
-    console.log("Card already has id: " + this.id);
+    log.warn("Card already has id: " + this.id);
   }
 
   public get name()                { return this._name; }
@@ -63,7 +63,7 @@ export abstract class BaseCard {
     this.updateGlobal();
   }
   public RemoveAttribute(attributeName: string) {
-    console.log(`Removing attribute: ${attributeName}`);
+    log.info(`Removing attribute: ${attributeName}`);
     this.updateGlobal();
   }
 
