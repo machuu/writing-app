@@ -2,6 +2,7 @@
  * Text Editor
  */
 import EditorJS from "@editorjs/editorjs";
+import log from "loglevel";
 
 let defaultTextEditorData: any = {
   blocks: [

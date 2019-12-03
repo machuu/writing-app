@@ -1,6 +1,7 @@
 // Navigation Helpers
 //
 //
+import log from "loglevel";
 
 class NavMenu {
 

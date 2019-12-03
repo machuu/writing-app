@@ -1,5 +1,6 @@
 import BaseCard from "./baseCard";
 import Card from "./card";
+import log from "loglevel";
 
 export interface IDeckJSON {
   _attributes: any;

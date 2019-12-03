@@ -21,9 +21,12 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-import Project from "./project";
-import Deck from "./deck";
 import Card from "./card";
+import Deck from "./deck";
+import log from "loglevel";
+import Project from "./project";
+
+log.setLevel("debug");
 
 let project: Project = new Project();
 project.setupProjectWindow();

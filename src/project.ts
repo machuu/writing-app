@@ -1,8 +1,11 @@
 import BaseCard from "./baseCard";
 import Deck from "./deck";
 import Card from "./card";
+import log from "loglevel";
 import NavMenu from "./navigation";
 import TextEditor from "./editor";
+
+log.setLevel("debug");
 
 export interface IProjectJSON {
   _attributes: any;

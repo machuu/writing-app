@@ -1,3 +1,5 @@
+import log from "loglevel";
+
 export abstract class BaseCard {
   protected _attributes: any = {}; // array of Card Attributes
   protected _id: string; // unique ID

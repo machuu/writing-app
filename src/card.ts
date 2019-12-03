@@ -1,4 +1,5 @@
 import BaseCard from "./baseCard";
+import log from "loglevel";
 
 export interface ICardJSON {
   _attributes: any;
