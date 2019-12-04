@@ -147,6 +147,11 @@ export class Project extends BaseCard {
         log.debug(`Added Deck '${newDeckId}'`);
         this.updateGlobal();
         break;
+      case "LOADCARD":
+        let cardId: string = event.target.getAttribute("cardId");
+        this.loadCardIntoEditor(cardId);
+        this.updateGlobal();
+        break;
       default:
         log.warn(`unknown click action '${clickAction}' on id: ${target.id}`);
         return;
