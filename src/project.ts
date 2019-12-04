@@ -164,7 +164,6 @@ export class Project extends BaseCard {
 
     this.mainEditor = new TextEditor("editorjs");
     this.mainEditor.addSaveButton("saveButton");
-    this.mainEditor.addLoadButton("loadButton");
   }
 
   public populateNavigators() {
