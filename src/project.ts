@@ -195,7 +195,7 @@ export class Project extends BaseCard {
     let cardDiv: HTMLElement;
 
     let navigatorType: string = argNavigatorType.toUpperCase();
-    log.trace(`Populating Navigator Type: ${navigatorType}`);
+    log.info(`Populating Navigator Type: ${navigatorType}`);
     let navigator: NavMenu;
     let deckIds: string[];
 
