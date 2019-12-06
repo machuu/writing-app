@@ -5,18 +5,18 @@
   z-index: 2; /* Stay on top */
   background-color: #111; /* Black*/
   overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
+  padding-top: 8px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the scene-navigator */
 }
 
-#scene-navigator {
+.navigator-leftside {
   position: fixed; /* Stay in place */
   width: 20; /* 0 width - change this with JavaScript */
   top: 0;
   left: 0;
 }
 
-#card-navigator {
+.navigator-rightside {
   position: fixed; /* Stay in place */
   width: 20; /* 0 width - change this with JavaScript */
   top: 0;
@@ -25,7 +25,7 @@
 
 /* The scene-navigator links */
 .navigator-item {
-  padding: 32px 8px 8px 32px;
+  padding: 8px 8px 8px 16px;
   text-decoration: none;
   font-size: 25px;
   color: #818181;
@@ -34,7 +34,7 @@
 }
 
 /* When you mouse over the navigation links, change their color */
-#scene-navigator div:hover {
+.navigator-item:hover {
   color: #f1f1f1;
 }
 
@@ -45,13 +45,13 @@
   font-size: 36px;
 }
 
-#scene-navigator-button-toggle {
+.navigator-leftside .navigator-button-toggle {
   position: absolute;
   top: 50%;
   right: 0;
 }
 
-#card-navigator-button-toggle {
+.navigator-rightside .navigator-button-toggle {
   position: absolute;
   top: 50%;
   left: 0;
