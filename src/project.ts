@@ -341,6 +341,33 @@ export class Project extends BaseCard {
     this.sceneNavigator.close();
   }
 
+  public saveCardFromEditor(): void {
+    let cardIdToSave: string = this.mainEditor.element.getAttribute("activeCardId");
+    if (cardIdToSave == "") {
+      // No Active Card, so nothing to save
+      log.debug(`No activeCardId found in mainEditor`);
+    } else {
+      log.debug(`Saving data from mainEditor into ${cardIdToSave}`);
+      let cardToSave: Card = Card.cards[cardIdToSave];
+      log.trace(`Card before save`);
+      log.trace(cardToSave);
+
+      log.trace(`Updating Card Name from Editor Title: ${this.cardInfoElement.innerHTML}`);
+      cardToSave.name = this.cardInfoElement.innerHTML;
+
+      log.trace(`Saving Text from Editor`);
+      // Text Editor uses a Promise to save, so mainEditor.save() will return the promise
+      this.mainEditor.save().then( (savedText: any) => {
+        log.debug(`Project got savedText from Editor: `, savedText);
+        cardToSave.text = savedText;
+        log.debug(`Finished saving Card: `, cardToSave);
+      }).catch( (error: any) => {
+        log.error(`Failed to save Text: `, error)
+      });
+
+    }
+  }
+
   // JSON Helpers
   // per: http://choly.ca/post/typescript-json/
   public toJSON(): IProjectJSON {
