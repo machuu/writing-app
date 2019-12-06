@@ -169,6 +169,14 @@ class NavMenu {
     this.element.style.width = css_size;
   }
 
+  private hide_scrollbar() {
+    this.element.style.overflow = "hidden";
+  }
+
+  private show_scrollbar() {
+    this.element.style.overflow = "scroll";
+  }
+
 }
 
 export default NavMenu;
