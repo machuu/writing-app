@@ -52,6 +52,7 @@ export abstract class BaseCard {
   // text is JSON from Text Editor
   public get text(): any { return this._text; }
   public set text(newTextData: any) {
+    log.debug("Set Card Text Data: ", newTextData);
     this._text = newTextData;
     this.updateGlobal();
   }
