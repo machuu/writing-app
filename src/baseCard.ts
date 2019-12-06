@@ -63,7 +63,11 @@ export abstract class BaseCard {
     this.updateGlobal();
   }
 
-  public AddAttribute(newAttributeName: string, newAttributeValue: any) {
+  public getAttribute(attribteName: string): string {
+    return this.attributes[attribteName];
+  }
+
+  public addAttribute(newAttributeName: string, newAttributeValue: any) {
     this._attributes[newAttributeName] =  newAttributeValue;
     this.updateGlobal();
   }
