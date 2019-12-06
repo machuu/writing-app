@@ -25,6 +25,9 @@ class NavMenu {
     log.info(`Constructing new NavMenu on element id: ${id}`);
     this._element = document.getElementById(id);
 
+    // Start with closed styling
+    this.close();
+
     // Try initializing NavMenu buttons, if the elements exist
     this.set_open_button(`${id}-button-open`);
     this.set_close_button(`${id}-button-close`);
