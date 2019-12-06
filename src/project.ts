@@ -7,7 +7,9 @@ import TextEditor from "./editor";
 
 const logGlobal = loglevel.getLogger("Global");
 const log = loglevel.getLogger("Project");
-log.setDefaultLevel(logGlobal.getLevel());
+log.info(`Global Log Level: ${logGlobal.getLevel()}`);
+log.setLevel(logGlobal.getLevel());
+log.info(`Project Log Level: ${log.getLevel()}`);
 
 export interface IProjectJSON {
   _attributes: any;

@@ -21,13 +21,14 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-import Card from "./card";
-import Deck from "./deck";
 import loglevel from "loglevel";
-import Project from "./project";
-
 const log = loglevel.getLogger("Global");
 log.setDefaultLevel("debug");
+
+import Card from "./card";
+import Deck from "./deck";
+import Project from "./project";
+
 
 let project: Project = new Project();
 project.setupProjectWindow();
