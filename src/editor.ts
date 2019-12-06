@@ -77,9 +77,27 @@ class TextEditor {
   }
 
   public load(newText: any) {
+
+    if (newText["blocks"] == undefined ) {
+      newText = {
+        blocks: [
+          {
+            data: {
+              text: ""
+            },
+            type: "paragraph",
+          },
+        ],
+      }
+      log.debug(`Given text data is empty, replace with properly formatted JSON`, newText);
+    }
+    log.info("Loading Text Data: ", newText);
+    return this.editor.render(newText);
   }
 
   public save(): any {
+    log.info(`Fetching Editor Text Data`);
+    return this.editor.save();
   }
 
   // return JSON object of Text Editor Data
