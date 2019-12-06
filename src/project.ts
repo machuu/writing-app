@@ -22,6 +22,7 @@ export class Project extends BaseCard {
 
   public sceneNavigator: NavMenu;
   public referenceNavigator: NavMenu;
+  public cardInfoElement: HTMLElement;
   public mainEditor: TextEditor;
 
   private _deckIds: string[] = [];
@@ -169,6 +170,9 @@ export class Project extends BaseCard {
 
     this.mainEditor = new TextEditor("editorjs");
     this.mainEditor.addSaveButton("saveButton");
+
+    this.cardInfoElement = document.getElementById("mainEditorCardInfo");
+    this.cardInfoElement.innerHTML = "Blank Card";
   }
 
   public populateNavigators() {
