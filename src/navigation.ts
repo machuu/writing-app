@@ -25,6 +25,9 @@ class NavMenu {
     log.info(`Constructing new NavMenu on element id: ${id}`);
     this._element = document.getElementById(id);
 
+    // Start with closed styling
+    this.close();
+
     // Try initializing NavMenu buttons, if the elements exist
     this.set_open_button(`${id}-button-open`);
     this.set_close_button(`${id}-button-close`);
@@ -140,6 +143,7 @@ class NavMenu {
     log.info(`Closing ${this.element.id}`);
     this.set_width(  this.closed_width  );
     this.set_height( this.closed_height );
+    this.hide_scrollbar();
     this._is_open = false;
   }
 
@@ -147,6 +151,7 @@ class NavMenu {
     log.info(`Opening ${this.element.id}`);
     this.set_width(  this.opened_width  );
     this.set_height( this.opened_height );
+    this.show_scrollbar();
     this._is_open = true;
   }
 
@@ -167,6 +172,14 @@ class NavMenu {
   private set_width(css_size: string) {
     log.debug(`Set ${this.element.id} width to ${css_size}`);
     this.element.style.width = css_size;
+  }
+
+  private hide_scrollbar() {
+    this.element.style.overflow = "hidden";
+  }
+
+  private show_scrollbar() {
+    this.element.style.overflow = "scroll";
   }
 
 }
