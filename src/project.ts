@@ -147,7 +147,7 @@ export class Project extends BaseCard {
         log.debug(`Added Deck '${newDeckId}'`);
         this.updateGlobal();
         break;
-      case "LOADCARD":
+      case "LOADSCENECARD":
         let cardId: string = event.target.getAttribute("cardId");
         this.loadCardIntoEditor(cardId);
         this.updateGlobal();
@@ -242,8 +242,9 @@ export class Project extends BaseCard {
         cardDiv.id = `LoadCard_${navigatorType}_${card.id}`;
         cardDiv.innerHTML = card.name;
         cardDiv.setAttribute("cardId", cardId);
-        cardDiv.setAttribute("clickAction", "loadCard");
+        cardDiv.setAttribute("clickAction", `load${navigatorType}Card`);
         cardDiv.setAttribute("navigatorType", navigatorType);
+        cardDiv.addEventListener("click", this, false);
 
         cardHolderDiv.appendChild(cardDiv);
       }
@@ -297,6 +298,38 @@ export class Project extends BaseCard {
     log.trace(`Removing Node: ${targetNode.nodeName}`);
     targetNode.parentNode.removeChild(targetNode);
 
+  }
+
+  public loadCardIntoEditor(cardIdToLoad: string): void {
+    log.debug(`Loading data from ${cardIdToLoad} into mainEditor`);
+
+    let activeCardId: string = this.mainEditor.element.getAttribute("activeCardId");
+    if ( activeCardId == cardIdToLoad ) {
+      log.debug(`This cardId is already loaded`);
+      return;
+    }
+
+    // Save activeCardId before loading new data into Editor
+    this.saveCardFromEditor();
+
+    let cardToLoad: Card = Card.cards[cardIdToLoad];
+    log.debug(cardToLoad);
+
+    log.trace(`Updating Editor Title to ${cardToLoad.name}`);
+    this.cardInfoElement.innerHTML = cardToLoad.name;
+
+    log.trace(`Setting activeCardId to: ${cardToLoad.id}`);
+    this.mainEditor.element.setAttribute("activeCardId", cardToLoad.id);
+
+    log.debug(`Loading Card Text into Editor`);
+    log.debug(cardToLoad.text);
+    this.mainEditor.load(cardToLoad.text).then( () => {
+      log.info(`Finished Loading Text Data from ${cardIdToLoad} into Text Editor`);
+    }).catch( (error: any) => {
+      log.error(`Error Loading Text Data from ${cardIdToLoad} into Text Editor`);
+    });
+
+    this.sceneNavigator.close();
   }
 
   // JSON Helpers
