@@ -152,7 +152,6 @@ export class Project extends BaseCard {
       case "LOADSCENECARD":
         let cardId: string = event.target.getAttribute("cardId");
         this.loadCardIntoEditor(cardId);
-        this.updateGlobal();
         break;
       case "SAVESCENECARD":
         this.saveCardFromEditor();
