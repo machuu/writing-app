@@ -5,7 +5,7 @@
   z-index: 2; /* Stay on top */
   background-color: #111; /* Black*/
   overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
+  padding-top: 8px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the scene-navigator */
 }
 
@@ -25,7 +25,7 @@
 
 /* The scene-navigator links */
 .navigator-item {
-  padding: 32px 8px 8px 32px;
+  padding: 8px 8px 8px 16px;
   text-decoration: none;
   font-size: 25px;
   color: #818181;
