@@ -155,7 +155,6 @@ export class Project extends BaseCard {
         break;
       case "SAVESCENECARD":
         this.saveCardFromEditor();
-        this.updateGlobal();
       default:
         log.warn(`unknown click action '${clickAction}' on id: ${target.id}`);
         return;
@@ -367,6 +366,7 @@ export class Project extends BaseCard {
         log.error(`Failed to save Text: `, error)
       });
 
+      this.updateGlobal();
     }
   }
 
