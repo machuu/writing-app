@@ -154,6 +154,9 @@ export class Project extends BaseCard {
         this.loadCardIntoEditor(cardId);
         this.updateGlobal();
         break;
+      case "SAVESCENECARD":
+        this.saveCardFromEditor();
+        this.updateGlobal();
       default:
         log.warn(`unknown click action '${clickAction}' on id: ${target.id}`);
         return;
