@@ -170,6 +170,7 @@ export class Project extends BaseCard {
     this.referenceNavigator.opened_width = "250px";
 
     this.mainEditor = new TextEditor("mainEditor");
+    this.mainEditor.element.setAttribute("activeCardId", "");
 
     this.cardInfoElement = document.getElementById("mainEditorCardInfo");
     this.cardInfoElement.innerHTML = "Blank Card";
