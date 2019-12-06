@@ -22,6 +22,8 @@ export class Project extends BaseCard {
 
   public sceneNavigator: NavMenu;
   public referenceNavigator: NavMenu;
+  public cardInfoElement: HTMLElement;
+  public saveButton: HTMLElement;
   public mainEditor: TextEditor;
 
   private _deckIds: string[] = [];
@@ -147,6 +149,12 @@ export class Project extends BaseCard {
         log.debug(`Added Deck '${newDeckId}'`);
         this.updateGlobal();
         break;
+      case "LOADSCENECARD":
+        let cardId: string = event.target.getAttribute("cardId");
+        this.loadCardIntoEditor(cardId);
+        break;
+      case "SAVESCENECARD":
+        this.saveCardFromEditor();
       default:
         log.warn(`unknown click action '${clickAction}' on id: ${target.id}`);
         return;
@@ -162,9 +170,15 @@ export class Project extends BaseCard {
     this.referenceNavigator.closed_width = "20px";
     this.referenceNavigator.opened_width = "250px";
 
-    this.mainEditor = new TextEditor("editorjs");
-    this.mainEditor.addSaveButton("saveButton");
-    this.mainEditor.addLoadButton("loadButton");
+    this.mainEditor = new TextEditor("mainEditor");
+    this.mainEditor.element.setAttribute("activeCardId", "");
+
+    this.cardInfoElement = document.getElementById("mainEditorCardInfo");
+    this.cardInfoElement.innerHTML = "Blank Card";
+
+    this.saveButton = document.getElementById("saveButton");
+    this.saveButton.setAttribute("clickAction", "saveSceneCard");
+    this.saveButton.addEventListener("click", this, false);
   }
 
   public populateNavigators() {
@@ -180,7 +194,7 @@ export class Project extends BaseCard {
     let cardDiv: HTMLElement;
 
     let navigatorType: string = argNavigatorType.toUpperCase();
-    log.trace(`Populating Navigator Type: ${navigatorType}`);
+    log.info(`Populating Navigator Type: ${navigatorType}`);
     let navigator: NavMenu;
     let deckIds: string[];
 
@@ -218,7 +232,7 @@ export class Project extends BaseCard {
       log.trace(`Adding Deck: ${deck.id}`);
       deckDiv = document.createElement("div");
       deckDiv.classList.add("navigator-item");
-      deckDiv.id = `${navigatorType}_{deck.id}`;
+      deckDiv.id = `${navigatorType}_${deck.id}`;
       deckDiv.innerHTML = deck.name;
       deckDiv.setAttribute("deckId", deckId);
       deckHolderDiv.appendChild(deckDiv);
@@ -238,8 +252,9 @@ export class Project extends BaseCard {
         cardDiv.id = `LoadCard_${navigatorType}_${card.id}`;
         cardDiv.innerHTML = card.name;
         cardDiv.setAttribute("cardId", cardId);
-        cardDiv.setAttribute("clickAction", "loadCard");
+        cardDiv.setAttribute("clickAction", `load${navigatorType}Card`);
         cardDiv.setAttribute("navigatorType", navigatorType);
+        cardDiv.addEventListener("click", this, false);
 
         cardHolderDiv.appendChild(cardDiv);
       }
@@ -293,6 +308,66 @@ export class Project extends BaseCard {
     log.trace(`Removing Node: ${targetNode.nodeName}`);
     targetNode.parentNode.removeChild(targetNode);
 
+  }
+
+  public loadCardIntoEditor(cardIdToLoad: string): void {
+    log.debug(`Loading data from ${cardIdToLoad} into mainEditor`);
+
+    let activeCardId: string = this.mainEditor.element.getAttribute("activeCardId");
+    if ( activeCardId == cardIdToLoad ) {
+      log.debug(`This cardId is already loaded`);
+      return;
+    }
+
+    // Save activeCardId before loading new data into Editor
+    this.saveCardFromEditor();
+
+    let cardToLoad: Card = Card.cards[cardIdToLoad];
+    log.debug(cardToLoad);
+
+    log.trace(`Updating Editor Title to ${cardToLoad.name}`);
+    this.cardInfoElement.innerHTML = cardToLoad.name;
+
+    log.trace(`Setting activeCardId to: ${cardToLoad.id}`);
+    this.mainEditor.element.setAttribute("activeCardId", cardToLoad.id);
+
+    log.debug(`Loading Card Text into Editor`);
+    log.debug(cardToLoad.text);
+    this.mainEditor.load(cardToLoad.text).then( () => {
+      log.info(`Finished Loading Text Data from ${cardIdToLoad} into Text Editor`);
+    }).catch( (error: any) => {
+      log.error(`Error Loading Text Data from ${cardIdToLoad} into Text Editor`);
+    });
+
+    this.sceneNavigator.close();
+  }
+
+  public saveCardFromEditor(): void {
+    let cardIdToSave: string = this.mainEditor.element.getAttribute("activeCardId");
+    if (cardIdToSave == "") {
+      // No Active Card, so nothing to save
+      log.debug(`No activeCardId found in mainEditor`);
+    } else {
+      log.debug(`Saving data from mainEditor into ${cardIdToSave}`);
+      let cardToSave: Card = Card.cards[cardIdToSave];
+      log.trace(`Card before save`);
+      log.trace(cardToSave);
+
+      log.trace(`Updating Card Name from Editor Title: ${this.cardInfoElement.innerHTML}`);
+      cardToSave.name = this.cardInfoElement.innerHTML;
+
+      log.trace(`Saving Text from Editor`);
+      // Text Editor uses a Promise to save, so mainEditor.save() will return the promise
+      this.mainEditor.save().then( (savedText: any) => {
+        log.debug(`Project got savedText from Editor: `, savedText);
+        cardToSave.text = savedText;
+        log.debug(`Finished saving Card: `, cardToSave);
+      }).catch( (error: any) => {
+        log.error(`Failed to save Text: `, error)
+      });
+
+      this.updateGlobal();
+    }
   }
 
   // JSON Helpers

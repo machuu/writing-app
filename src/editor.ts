@@ -76,40 +76,28 @@ class TextEditor {
     this.dataId = this.defaultDataId;
   }
 
-  public addSaveButton(saveButtonId: string): void {
-    if ( document.getElementById(saveButtonId) ) {
-      document.getElementById(saveButtonId).addEventListener("click", () => { this.save(); });
+  public load(newText: any) {
+
+    if (newText["blocks"] == undefined ) {
+      newText = {
+        blocks: [
+          {
+            data: {
+              text: ""
+            },
+            type: "paragraph",
+          },
+        ],
+      }
+      log.debug(`Given text data is empty, replace with properly formatted JSON`, newText);
     }
+    log.info("Loading Text Data: ", newText);
+    return this.editor.render(newText);
   }
 
-  public addLoadButton(loadButtonId: string): void {
-    if ( document.getElementById(loadButtonId) ) {
-      document.getElementById(loadButtonId).addEventListener("click", () => { this.load(); });
-    }
-  }
-
-  // retreive dataId from storage, then render in Text Editor
-  public load(dataId: string = "" ): void {
-    if ( dataId === "" ) {
-      dataId = this.promptForDataId();
-    }
-    log.debug(`Retreiving EditorJS from localStorage: ${dataId}`);
-    let retreivedData = JSON.parse( localStorage.getItem(dataId) );
-    log.trace("retreived_data: ", retreivedData );
-    this.editor.render(retreivedData);
-  }
-
-  // save data from Text Editor into dataId
-  public save(dataId: string = ""): void {
-    if ( dataId === "" ) {
-      dataId = this.promptForDataId();
-    }
-
-    this.editor.save().then((savedData: any) => {
-        log.debug(`Saving Editor Data: ${dataId}`);
-        log.trace(savedData);
-        localStorage.setItem(dataId, JSON.stringify(savedData));
-      });
+  public save(): any {
+    log.info(`Fetching Editor Text Data`);
+    return this.editor.save();
   }
 
   // return JSON object of Text Editor Data
@@ -121,18 +109,6 @@ class TextEditor {
   public set data(data: any) {
     this._data = data;
     this.renderData(this.data);
-  }
-
-  private confirmOverwriteOld(dataId: string): boolean {
-    return confirm(`Overwrite existing saved data with id '${dataId}'` );
-  }
-
-  private promptForDataId(): string {
-    return prompt("Enter ID for Editor Data:");
-  }
-
-  private dataIdExists(dataId: string) {
-    return ( localStorage.getItem(dataId) === null );
   }
 
   private renderData(data: any) {
