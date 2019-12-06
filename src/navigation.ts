@@ -140,6 +140,7 @@ class NavMenu {
     log.info(`Closing ${this.element.id}`);
     this.set_width(  this.closed_width  );
     this.set_height( this.closed_height );
+    this.hide_scrollbar();
     this._is_open = false;
   }
 
@@ -147,6 +148,7 @@ class NavMenu {
     log.info(`Opening ${this.element.id}`);
     this.set_width(  this.opened_width  );
     this.set_height( this.opened_height );
+    this.show_scrollbar();
     this._is_open = true;
   }
 
