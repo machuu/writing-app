@@ -233,7 +233,7 @@ export class Project extends BaseCard {
       log.trace(`Adding Deck: ${deck.id}`);
       deckDiv = document.createElement("div");
       deckDiv.classList.add("navigator-item");
-      deckDiv.id = `${navigatorType}_{deck.id}`;
+      deckDiv.id = `${navigatorType}_${deck.id}`;
       deckDiv.innerHTML = deck.name;
       deckDiv.setAttribute("deckId", deckId);
       deckHolderDiv.appendChild(deckDiv);
