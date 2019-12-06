@@ -168,7 +168,7 @@ export class Project extends BaseCard {
     this.referenceNavigator.closed_width = "20px";
     this.referenceNavigator.opened_width = "250px";
 
-    this.mainEditor = new TextEditor("editorjs");
+    this.mainEditor = new TextEditor("mainEditor");
     this.mainEditor.addSaveButton("saveButton");
 
     this.cardInfoElement = document.getElementById("mainEditorCardInfo");
