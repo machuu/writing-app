@@ -247,7 +247,7 @@ export class Project extends BaseCard {
       deleteDiv.setAttribute("deckId", deck.id);
       deleteDiv.setAttribute("clickAction", `remove${navigatorType}Deck`);
       deleteDiv.addEventListener("click", this, false);
-      deckDiv.append(deleteDiv);
+      deckDiv.appendChild(deleteDiv);
 
       cardHolderDiv = document.createElement("div");
       cardHolderDiv.style.paddingLeft = "10px";
