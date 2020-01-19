@@ -38,6 +38,14 @@
   color: #f1f1f1;
 }
 
+.navigator-item .button {
+	display: none;
+}
+
+.navigator-item:hover .button {
+	display: block;
+}
+
 /* Position and style the close button (top right corner) */
 .navigator-button-toggle {
   color: #818181;
