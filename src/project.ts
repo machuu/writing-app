@@ -194,6 +194,7 @@ export class Project extends BaseCard {
     let deckDiv: HTMLElement;
     let cardHolderDiv: HTMLElement;
     let cardDiv: HTMLElement;
+    let deleteDiv: HTMLElement;
 
     let navigatorType: string = argNavigatorType.toUpperCase();
     log.info(`Populating Navigator Type: ${navigatorType}`);
@@ -238,6 +239,15 @@ export class Project extends BaseCard {
       deckDiv.innerHTML = deck.name;
       deckDiv.setAttribute("deckId", deckId);
       deckHolderDiv.appendChild(deckDiv);
+
+      // Add delete button to deckDiv
+      deleteDiv = document.createElement("div");
+      deleteDiv.innerHTML = "X";
+      deleteDiv.classList.add("button");
+      deleteDiv.setAttribute("deckId", deck.id);
+      deleteDiv.setAttribute("clickAction", `remove${navigatorType}Deck`);
+      deleteDiv.addEventListener("click", this, false);
+      deckDiv.append(deleteDiv);
 
       cardHolderDiv = document.createElement("div");
       cardHolderDiv.style.paddingLeft = "10px";
