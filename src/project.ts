@@ -116,6 +116,20 @@ export class Project extends BaseCard {
     this.updateGlobal();
   }
 
+  public removeSceneDeck(deck: Deck) {
+    log.info(`Removing Scene Deck: ${deck.id}`);
+  }
+  public removeSceneDeckId( deckId: string ) {
+    log.info(`Removing Scene Deck: ${deckId}`);
+  }
+
+  public removeReferenceDeck(deck: Deck) {
+    log.info(`Removing Reference Deck: ${deck.id}`);
+  }
+  public removeReferenceDeckId( deckId: string ) {
+    log.info(`Removing Reference Deck: ${deckId}`);
+  }
+
   public handleEvent(event: any) {
 
     switch( event.type ) {
@@ -157,6 +171,12 @@ export class Project extends BaseCard {
         break;
       case "SAVESCENECARD":
         this.saveCardFromEditor();
+      case "REMOVEREFERENCEDECK":
+        let deckIdToRemove: string = event.target.getAttribute("deckId");
+        this.removeReferenceDeckId(deckIdToRemove);
+      case "REMOVESCENEDECK":
+        let deckIdToRemove: string = event.target.getAttribute("deckId");
+        this.removeSceneDeckId(deckIdToRemove);
       default:
         log.warn(`unknown click action '${clickAction}' on id: ${target.id}`);
         return;
