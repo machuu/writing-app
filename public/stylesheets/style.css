@@ -7,9 +7,19 @@ a {
   color: #00B7FF;
 }
 
-#editorjs-border {
+#mainEditorCardInfo {
 	border-style: solid;
+	margin: 5px;
 }
+
+#mainEditor {
+	border-style: solid;
+	margin: 5px;
+}
+
+/* #editorjs-border { */
+/* 	border-style: solid; */
+/* } */
 
 /**
  * Simple loader for page transition

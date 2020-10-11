@@ -55,8 +55,8 @@ body {
   }
 }
 
-.ce-example__content {
-  max-width: 1100px;
+.ce-block__content {
+  max-width: 80vw;
   margin: 0 auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -75,7 +75,7 @@ body {
   padding: 0 30px;
 }
 
-.ce-example__output-content {
+.ce-block__output-content {
   max-width: 650px;
   margin: 30px auto;
   color: #ABADC3;
