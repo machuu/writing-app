@@ -150,7 +150,7 @@ export class Project extends BaseCard {
     let clickAction: string = target.getAttribute("clickAction");
 
     switch ( clickAction.toUpperCase() ) {
-      case "NEWCARD":
+      case "NEWCARD": {
         // Add a new Card to deckId in element name
         let deckId: string = event.target.getAttribute("deckId");
         let newCardId: string = Deck.decks[deckId].newCard();
@@ -158,28 +158,34 @@ export class Project extends BaseCard {
         log.debug(`Added Card '${newCardId}' to Deck '${deckId}'`);
         this.updateGlobal();
         break;
-      case "NEWDECK":
+      }
+      case "NEWDECK": {
         let deckType: string = event.target.getAttribute("deckType");
         let newDeckId: string = this.newDeck(deckType);
         Deck.decks[newDeckId].name = "NewDeck";
         log.debug(`Added Deck '${newDeckId}'`);
         this.updateGlobal();
         break;
-      case "LOADSCENECARD":
+      }
+      case "LOADSCENECARD": {
         let cardId: string = event.target.getAttribute("cardId");
         this.loadCardIntoEditor(cardId);
         break;
-      case "SAVESCENECARD":
+      }
+      case "SAVESCENECARD": {
         this.saveCardFromEditor();
         break;
-      case "REMOVEREFERENCEDECK":
+      }
+      case "REMOVEREFERENCEDECK": {
         let deckIdToRemove: string = event.target.getAttribute("deckId");
         this.removeReferenceDeckId(deckIdToRemove);
         break;
-      case "REMOVESCENEDECK":
+      }
+      case "REMOVESCENEDECK": {
         let deckIdToRemove: string = event.target.getAttribute("deckId");
         this.removeSceneDeckId(deckIdToRemove);
         break;
+      }
       default:
         log.warn(`unknown click action '${clickAction}' on id: ${target.id}`);
         return;
