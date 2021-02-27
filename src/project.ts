@@ -171,12 +171,15 @@ export class Project extends BaseCard {
         break;
       case "SAVESCENECARD":
         this.saveCardFromEditor();
+        break;
       case "REMOVEREFERENCEDECK":
         let deckIdToRemove: string = event.target.getAttribute("deckId");
         this.removeReferenceDeckId(deckIdToRemove);
+        break;
       case "REMOVESCENEDECK":
         let deckIdToRemove: string = event.target.getAttribute("deckId");
         this.removeSceneDeckId(deckIdToRemove);
+        break;
       default:
         log.warn(`unknown click action '${clickAction}' on id: ${target.id}`);
         return;
