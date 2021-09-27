@@ -8,10 +8,10 @@ RUN apt-get update && apt-get install -y \
 	rsync \
 	tmux \
 	vim-common
-                    
+
 USER gitpod
 
 ## Import dotfiles
 RUN git clone --depth 1 https://github.com/machuu/dotfiles.git ~/dotfiles
-RUN bash -c ~/dotfiles/dotfiles install default
+RUN ~/dotfiles/dotfiles install default
 
