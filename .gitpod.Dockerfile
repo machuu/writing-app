@@ -1,4 +1,4 @@
-FROM gitpod/workspace-full
+FROM gitpod/workspace-full:latest
 
 # Install custom tools, runtime, etc. using apt-get
 # More information: https://www.gitpod.io/docs/42_config_docker/
