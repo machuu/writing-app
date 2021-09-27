@@ -3,8 +3,8 @@ version: "3"
 services:
   node:
     container_name: writing-app_dev
-    image: node:12.9.0-stretch
-    security_opt: 
+    image: node:16-stretch
+    security_opt:
       - label:disable
     user: "${UID-1000}:${GID-1000}"
     working_dir: /app
