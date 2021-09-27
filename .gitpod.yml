@@ -5,3 +5,5 @@ image:
   file: .gitpod.Dockerfile
 ports:
   - port: 8000
+    visibility: public
+    onOpen: notify
