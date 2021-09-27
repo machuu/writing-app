@@ -1,3 +1,4 @@
+
 tasks:
   - init: npm install && npm run build
     command: npm run start
@@ -7,3 +8,7 @@ ports:
   - port: 8000
     visibility: public
     onOpen: notify
+
+vscode:
+  extensions:
+    - vscodevim.vim
